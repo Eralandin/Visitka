@@ -15,7 +15,6 @@ namespace Visitka.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            // Проверяем, есть ли атрибут AllowAnonymous
             if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any())
             {
                 return;
@@ -29,7 +28,6 @@ namespace Visitka.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            // Не требуется реализация
         }
     }
 }

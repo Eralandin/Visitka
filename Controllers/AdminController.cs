@@ -20,7 +20,6 @@ namespace YourProjectName.Controllers
             _authService = authService;
         }
 
-        // Аутентификация - доступна без токена
         [HttpGet("checkadmin")]
         [AllowAnonymous]
         public async Task<ActionResult> CheckAdminExists()
@@ -174,7 +173,6 @@ namespace YourProjectName.Controllers
             return Ok(request);
         }
 
-        // Смена пароля
         [HttpPost("changepassword")]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordDto changePasswordDto)
         {
@@ -182,7 +180,6 @@ namespace YourProjectName.Controllers
             if (string.IsNullOrEmpty(token))
                 return Unauthorized();
 
-            // Получаем username из активной сессии (в реальной системе нужно хранить больше информации в токене)
             var result = await _authService.ChangePasswordAsync(changePasswordDto.Username,
                 changePasswordDto.OldPassword, changePasswordDto.NewPassword);
 

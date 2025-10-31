@@ -14,7 +14,6 @@ namespace Visitka.Services
             _context = context;
         }
 
-        // Portfolio CRUD operations
         public async Task<IEnumerable<Portfolio>> GetPortfoliosAsync()
         {
             return await _context.Portfolios.ToListAsync();
@@ -60,7 +59,6 @@ namespace Visitka.Services
             return true;
         }
 
-        // Price CRUD operations
         public async Task<IEnumerable<Price>> GetPricesAsync()
         {
             return await _context.Prices.ToListAsync();
@@ -103,7 +101,6 @@ namespace Visitka.Services
             return true;
         }
 
-        // Request Read-only operations
         public async Task<IEnumerable<Request>> GetRequestsAsync()
         {
             return await _context.Requests.OrderByDescending(r => r.CreatedAt).ToListAsync();

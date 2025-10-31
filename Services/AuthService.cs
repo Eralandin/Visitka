@@ -50,11 +50,9 @@ namespace Visitka.Services
             if (admin == null || !VerifyPassword(password, admin.PasswordHash))
                 return false;
 
-            // Обновляем время последнего входа
             admin.LastLogin = DateTime.UtcNow;
             await _context.SaveChangesAsync();
 
-            // Создаем токен и сохраняем в cookie
             var token = GenerateToken();
             SetAuthCookie(token);
 
@@ -66,9 +64,6 @@ namespace Visitka.Services
             var token = GetAuthCookie();
             if (string.IsNullOrEmpty(token))
                 return false;
-
-            // Здесь можно добавить дополнительную валидацию токена из БД если нужно
-            // Пока будем доверять cookie с установленным сроком действия
 
             return true;
         }
@@ -84,7 +79,6 @@ namespace Visitka.Services
             admin.PasswordHash = HashPassword(newPassword);
             await _context.SaveChangesAsync();
 
-            // При смене пароля удаляем auth cookie
             RemoveAuthCookie();
 
             return true;
@@ -102,11 +96,11 @@ namespace Visitka.Services
 
             var cookieOptions = new CookieOptions
             {
-                HttpOnly = true, // Защита от XSS
-                Secure = true,   // Только HTTPS в production
-                SameSite = SameSiteMode.Strict, // Защита от CSRF
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
                 Expires = DateTime.UtcNow.Add(_tokenLifetime),
-                Path = "/admin" // Cookie доступен только для админских routes
+                Path = "/admin"
             };
 
             httpContext.Response.Cookies.Append("AdminAuthToken", token, cookieOptions);

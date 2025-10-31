@@ -17,7 +17,6 @@ namespace Visitka.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Уникальное имя пользователя для администратора
             modelBuilder.Entity<AdminUser>()
                 .HasIndex(a => a.Username)
                 .IsUnique();

@@ -6,12 +6,10 @@ namespace   Visitka.Filters
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            // Ничего не делаем - разрешаем доступ
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            // Ничего не делаем
         }
     }
 }
