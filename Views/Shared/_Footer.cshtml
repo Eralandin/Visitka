@@ -1,5 +1,32 @@
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2025 - Visitka - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<div class="footer-container">
+    <div class="nav-container pt-5">
+        <ul class="navbar-nav justify-content-center flex-row">
+            <li class="nav-item">
+                <a class="nav-link text-black pe-5" asp-area="" asp-controller="Portfolio" asp-action="Index">Портфолио</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black pe-5" asp-area="" asp-controller="Price" asp-action="Index">Прайс</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black pe-5" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black px-3 footer-request" asp-area="" asp-controller="Request" asp-action="Index">Написать нам →</a>
+            </li>
+        </ul>
     </div>
-</footer>
+    <div class="footer-bottom text-center mb-5">
+        <div class="brand-text">DIRECT.GROW</div>
+        <div class="year-text" id="currentYear">2024</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearElement = document.getElementById('currentYear');
+        if (yearElement) {
+            const currentYear = new Date().getFullYear();
+            yearElement.textContent = currentYear;
+        }
+    });
+</script>
