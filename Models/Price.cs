@@ -16,7 +16,6 @@ namespace Visitka.Models
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        [Range(0, 999999999999.99)]
-        public decimal MinCost { get; set; }
+        public int MinCost { get; set; }
     }
 }
