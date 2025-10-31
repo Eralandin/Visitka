@@ -1,83 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Visitka.Data;
 
 namespace Visitka.Controllers
 {
+    [Route("Prices")]
     public class PriceController : Controller
     {
-        // GET: PriceController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public PriceController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: PriceController/Details/{id}
-        public ActionResult Details(int id)
+        // localhost:8218/prices
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        // GET: PriceController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PriceController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PriceController/Edit/{id}
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PriceController/Edit/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PriceController/Delete/{id}
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PriceController/Delete/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var prices = await _context.Prices.ToListAsync();
+            return View(prices);
         }
     }
 }

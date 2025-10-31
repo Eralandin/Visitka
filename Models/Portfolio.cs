@@ -26,4 +26,16 @@ namespace Visitka.Models
 
         public byte[]? MobileImage { get; set; }
     }
+
+
+    public class PortfolioViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string TaskDescription { get; set; } = string.Empty;
+        public string SolutionDescription { get; set; } = string.Empty;
+        public bool HasPreviewImage { get; set; }
+        public bool HasMainImage { get; set; }
+        public bool HasMobileImage { get; set; }
+    }
 }

@@ -1,83 +1,46 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Visitka.Data;
+using Visitka.Models;
 
 namespace Visitka.Controllers
 {
+    [Route("Request")]
     public class RequestController : Controller
     {
-        // GET: RequestController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public RequestController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // localhost:8218/request
+        [HttpGet]
+        public IActionResult Index()
         {
             return View();
         }
 
-        // GET: RequestController/Details/{id}
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: RequestController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: RequestController/Create
+        // localhost:8218/request
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Index(Request request)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Requests.Add(request);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Success");
             }
-            catch
-            {
-                return View();
-            }
+            return View(request);
         }
 
-        // GET: RequestController/Edit/{id}
-        public ActionResult Edit(int id)
+        // localhost:8218/request/success
+        [Route("Success")]
+        public IActionResult Success()
         {
             return View();
-        }
-
-        // POST: RequestController/Edit/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RequestController/Delete/{id}
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RequestController/Delete/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

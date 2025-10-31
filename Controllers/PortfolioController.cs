@@ -1,83 +1,146 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Visitka.Data;
+using Visitka.Models;
 
 namespace Visitka.Controllers
 {
+    [Route("Portfolio")] // Все действия контроллера будут доступны по /Portfolio
     public class PortfolioController : Controller
     {
-        // GET: PortfolioController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public PortfolioController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: PortfolioController/Details/{id}
-        public ActionResult Details(int id)
+        // localhost:8218/portfolio
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var portfolios = await _context.Portfolios
+                .Select(p => new PortfolioViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    TaskDescription = p.TaskDescription,
+                    SolutionDescription = p.SolutionDescription,
+                    HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
+                    HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
+                    HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0
+                })
+                .ToListAsync();
+
+            return View(portfolios);
         }
 
-        // GET: PortfolioController/Create
-        public ActionResult Create()
+        // localhost:8218/portfolio/details/1
+        [Route("Details/{id}")]
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
-        }
+            var portfolio = await _context.Portfolios
+                .Where(p => p.Id == id)
+                .Select(p => new PortfolioViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    TaskDescription = p.TaskDescription,
+                    SolutionDescription = p.SolutionDescription,
+                    HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
+                    HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
+                    HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0
+                })
+                .FirstOrDefaultAsync();
 
-        // POST: PortfolioController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (portfolio == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(portfolio);
         }
 
-        // GET: PortfolioController/Edit/{id}
-        public ActionResult Edit(int id)
+
+        // GET: /portfolio/image/preview/1
+        [HttpGet("portfolio/image/preview/{id}")]
+        public async Task<IActionResult> GetPreviewImage(int id)
         {
-            return View();
+            var portfolio = await _context.Portfolios
+                .Where(p => p.Id == id)
+                .Select(p => new { p.PreviewImage, p.Name })
+                .FirstOrDefaultAsync();
+
+            return GetImageResult(portfolio?.PreviewImage, portfolio?.Name, "preview");
         }
 
-        // POST: PortfolioController/Edit/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // GET: /portfolio/image/main/1
+        [HttpGet("portfolio/image/main/{id}")]
+        public async Task<IActionResult> GetMainImage(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var portfolio = await _context.Portfolios
+                .Where(p => p.Id == id)
+                .Select(p => new { p.MainImage, p.Name })
+                .FirstOrDefaultAsync();
+
+            return GetImageResult(portfolio?.MainImage, portfolio?.Name, "main");
         }
 
-        // GET: PortfolioController/Delete/{id}
-        public ActionResult Delete(int id)
+        // GET: /portfolio/image/mobile/1
+        [HttpGet("portfolio/image/mobile/{id}")]
+        public async Task<IActionResult> GetMobileImage(int id)
         {
-            return View();
+            var portfolio = await _context.Portfolios
+                .Where(p => p.Id == id)
+                .Select(p => new { p.MobileImage, p.Name })
+                .FirstOrDefaultAsync();
+
+            return GetImageResult(portfolio?.MobileImage, portfolio?.Name, "mobile");
         }
 
-        // POST: PortfolioController/Delete/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        private IActionResult GetImageResult(byte[]? imageData, string? name, string imageType)
         {
-            try
+            if (imageData == null || imageData.Length == 0)
             {
-                return RedirectToAction(nameof(Index));
+                // Можно вернуть placeholder изображение
+                return NotFound($"Image {imageType} not found for portfolio {name}");
             }
-            catch
-            {
-                return View();
-            }
+
+            var contentType = GetImageContentType(imageData);
+            var fileName = $"{name ?? "portfolio"}-{imageType}.{GetFileExtension(contentType)}";
+
+            return File(imageData, contentType, fileName);
         }
+
+        private string GetImageContentType(byte[] imageData)
+        {
+            if (imageData.Length > 1 && imageData[0] == 0xFF && imageData[1] == 0xD8)
+                return "image/jpeg";
+
+            if (imageData.Length > 0 && imageData[0] == 0x89 && imageData[1] == 0x50)
+                return "image/png";
+
+            if (imageData.Length > 1 && imageData[0] == 0x47 && imageData[1] == 0x49)
+                return "image/gif";
+
+            if (imageData.Length > 7 && imageData[0] == 0x42 && imageData[1] == 0x4D)
+                return "image/bmp";
+
+            return "image/jpeg";
+        }
+
+        private string GetFileExtension(string contentType)
+        {
+            return contentType switch
+            {
+                "image/jpeg" => "jpg",
+                "image/png" => "png",
+                "image/gif" => "gif",
+                "image/bmp" => "bmp",
+                _ => "jpg"
+            };
+        }
+
     }
+
+
 }
