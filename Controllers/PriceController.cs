@@ -11,7 +11,7 @@ namespace Visitka.Controllers
             return View();
         }
 
-        // GET: PriceController/Details/5
+        // GET: PriceController/Details/{id}
         public ActionResult Details(int id)
         {
             return View();
@@ -38,13 +38,13 @@ namespace Visitka.Controllers
             }
         }
 
-        // GET: PriceController/Edit/5
+        // GET: PriceController/Edit/{id}
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: PriceController/Edit/5
+        // POST: PriceController/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace Visitka.Controllers
             }
         }
 
-        // GET: PriceController/Delete/5
+        // GET: PriceController/Delete/{id}
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: PriceController/Delete/5
+        // POST: PriceController/Delete/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

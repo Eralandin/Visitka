@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Visitka.Models;
+using Npgsql;
 
 namespace Visitka.Data
 {
