@@ -10,18 +10,18 @@
 }
 
 .navbar-brand {
-    font-family: "Medium", serif;
+    font-family: "Medium", sans-serif;
     font-size: 36px;
     font-weight: 400;
 }
 
 .navbar-nav .nav-item {
-    font-size: 20px;
-    font-weight: 200;
     font-family: "Manrope", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
 }
 
- .nav-send {
+.nav-send {
     border-radius: 30px;
-    border: 0.5px solid white;
- }
+    border: 0.5px solid #ffffff;
+}
