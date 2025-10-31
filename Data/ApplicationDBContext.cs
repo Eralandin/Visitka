@@ -13,5 +13,15 @@ namespace Visitka.Data
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<AdminUser> AdminUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AdminUser>()
+                .HasIndex(a => a.Username)
+                .IsUnique();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
