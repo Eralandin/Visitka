@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Medium";
+    src: url("/fonts/Medium.otf");
+}
+
+.navbar {
+    padding: 55px;
+    height: 140px;
+    min-height: 140px;
+}
+
+.navbar-brand {
+    font-family: "Medium", sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    user-select: none;
+}
+
+.navbar-nav .nav-item {
+    font-family: "Manrope", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.nav-send {
+    border-radius: 30px;
+    border: 0.5px solid #ffffff;
+}

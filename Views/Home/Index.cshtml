@@ -2,7 +2,113 @@
     ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/home/main.css" asp-append-version="true">
+}
+<section class="slogan-section">
+    <div class="container py-4 align-center">
+        <div class="d-flex justify-content-center">
+            <div class="slogan">
+                <p class="text-start">
+                    <span class="slogan-text-up"><span class="asterisk">*</span>Вы создаете бизнес —</span>
+                </p>
+                <p class="text-end">
+                    <span class="slogan-text-down">мы создаем <strong> Вам </strong><span class="slogan-site px-3 pb-2"> сайт</span>.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="first-part-section">
+    <div class="order-button-container d-flex justify-content-center">
+        <a class="order-button text-light" asp-area="" asp-controller="Request" asp-action="Index">заказать свой эффективный дизайн</a>
+    </div>
+    <img class="i-feel-logo d-flex" src="~/homepage/Image_1.jpg" alt="i_feel_so_sad">
+</section>
+
+
+<section class="phrase-section position-relative">
+    <div class="phrase-container w-100 d-flex justify-content-center">
+        <div class="phrase-text text-light">
+            <p>75% пользователей оценивают доверие по виду сайта. </p>
+            <p>Визуально аккуратные сайты удерживают </p>
+            <p>внимание <span style="color: #5D73FF;">в 2 раза дольше</span>. Комплексный редизайн </p>
+            <p>способен <span style="color: #FF6F0F;">увеличить конверсию до 400%</span> (SWCP, NNG, UXP)</p>
+        </div>
+    </div>
+    <div class="bg-phrase"></div>
+</section>
+
+<section class="portfolio-section px-5">
+    <div class="portfolio-container">
+        <div class="row h-100">
+            <div class="col-md-6 ">
+                <a class="fc-link" asp-area="" asp-controller="Portfolio" asp-action="Index">
+                    <div class="card h-100 first-card">
+                        <div class="card-body first-card-body">
+                            <p class="fc-p1">ПОРТФОЛИО</p>
+                            <p class="fc-p2">Наши проекты,<br>специально<br>для Вас</p>
+                            <span class="fc-a">Просмотр</span>
+                        </div>
+                        <div class="first-card-bg"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="row h-100">
+                    <div class="col-12 pb-4">
+                        <a class="fc-link" asp-area="" asp-controller="Price" asp-action="Index">
+                            <div class="card h-100 second-card">
+                                <div class="card-body second-card-body">
+                                    <p class="sc-p1">НАШИ ЦЕНЫ</p>
+                                    <img class="sc-img" src="~/homepage/Strelka.svg"/> 
+                                    <p class="sc-p2">ЦЕНЫ</p>
+                                </div>
+                                <div class="second-card-bg"></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 pr-5">
+                        <a class="fc-link" asp-area="" asp-controller="Home" asp-action="Contacts">
+                            <div class="card h-100 third-card"> 
+                                <div class="card-body third-card-body">
+                                    <p class="tc-p1">НАШИ КОНТАКТЫ<br>И СПЕЦИАЛИСТЫ</p>
+                                    <img class="sc-img" src="~/homepage/Strelka.svg"/> 
+                                    <p class="tc-p2">О нас</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 pl-5">
+                        <a class="fc-link" asp-area="" asp-controller="Request" asp-action="Index">
+                            <div class="card h-100 fourth-card">
+                                <div class="card-body fourth-card-body">
+                                    <p class="foc-p1">ОСТАЛИСЬ ВОПРОСЫ?<br>ЗАДАЙТЕ ИХ</p>
+                                    <img class="foc-img" src="~/homepage/Strelka.svg"/> 
+                                    <p class="foc-p2">Заказать</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="last-section d-flex justify-content-center align-content-center flex-wrap">
+    <div class="last-section-container">
+        <div class="last-question">
+            <p class="last-p"><span class="asterisk">*</span>Остались вопросы - задайте их <span class="last-span">нам</span>.</p>
+        </div>
+        <form class="custom-question-form">
+            <div class="form-container row justify-content-between">
+                <input type="text" class="text-input col-8" placeholder="Задайте свой вопрос...">
+                <button type="submit" class="submit-btn col-4">Отправить</button>
+            </div>
+        </form>
+    </div>
+</section>
