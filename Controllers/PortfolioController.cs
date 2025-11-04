@@ -28,7 +28,7 @@ namespace Visitka.Controllers
                     HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
                     HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
                     HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0,
-                    ReleaseDate = p.ReleaseDate
+                    releasedate = p.releasedate
                 })
                 .ToListAsync();
 
@@ -50,7 +50,7 @@ namespace Visitka.Controllers
                     HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
                     HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
                     HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0,
-                    ReleaseDate = p.ReleaseDate
+                    releasedate = p.releasedate
                 })
                 .FirstOrDefaultAsync();
 

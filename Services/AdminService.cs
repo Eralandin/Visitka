@@ -43,7 +43,7 @@ namespace Visitka.Services
             existingPortfolio.PreviewImage = portfolio.PreviewImage;
             existingPortfolio.MainImage = portfolio.MainImage;
             existingPortfolio.MobileImage = portfolio.MobileImage;
-            existingPortfolio.ReleaseDate = portfolio.ReleaseDate;
+            existingPortfolio.releasedate = portfolio.releasedate;
 
             await _context.SaveChangesAsync();
             return existingPortfolio;
@@ -86,7 +86,7 @@ namespace Visitka.Services
             existingPrice.Name = price.Name;
             existingPrice.Description = price.Description;
             existingPrice.MinCost = price.MinCost;
-            existingPrice.Image = price.Image;
+            existingPrice.image = price.image;
 
             await _context.SaveChangesAsync();
             return existingPrice;

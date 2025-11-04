@@ -25,7 +25,7 @@ namespace Visitka.Models
         public byte[]? MainImage { get; set; }
 
         public byte[]? MobileImage { get; set; }
-        public int ReleaseDate { get; set; }
+        public int releasedate { get; set; }
     }
 
 
@@ -38,6 +38,6 @@ namespace Visitka.Models
         public bool HasPreviewImage { get; set; }
         public bool HasMainImage { get; set; }
         public bool HasMobileImage { get; set; }
-        public int ReleaseDate { get; set; }
+        public int releasedate { get; set; }
     }
 }
