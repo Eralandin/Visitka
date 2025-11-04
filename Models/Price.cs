@@ -17,5 +17,6 @@ namespace Visitka.Models
 
         [Required]
         public int MinCost { get; set; }
+        public byte[]? Image { get; set; }
     }
 }
