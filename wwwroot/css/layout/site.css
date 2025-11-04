@@ -1,6 +1,12 @@
 body{
   background-color: #000000;
   color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+}
+
+.asterisk {
+    color: #ff6600;
 }
 
 .backbtn {
