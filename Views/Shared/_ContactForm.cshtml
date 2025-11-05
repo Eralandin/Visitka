@@ -1,0 +1,104 @@
+@model Visitka.Models.Price
+<link rel="stylesheet" href="~/css/layout/contactform.css" asp-append-version="true" />
+
+<div class="container contactform-container">
+    <div class="row">
+        <div class="form-text-container col-5">
+            <p class="ft1">
+                <span class="asterisk">*</span>Оставьте свои контакты<br />
+                и информацию для<br />
+                обратной связи.
+            </p>
+            <p class="ft2">
+                В ближайшее время с вами<br />
+                свяжутся для уточнения<br />
+                деталей задачи
+            </p>
+        </div>
+        <div class="form-container col-7">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <input type="text" class="form-name" id="name" placeholder="Ваше имя" required>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <input type="tel" class="form-phone" id="phone" placeholder="Телефон" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <input type="email" class="form-email" id="email" placeholder="E-mail" required>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <input type="text" class="form-telegram" id="telegram" placeholder="Telegram" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="select mb-4">
+                    <div class="selectWrapper">
+                        <div class="selectCustom js-selectCustom">
+                            <div class="selectCustom-trigger">Выберите спект услуг</div>
+                            <div class="selectCustom-options">
+                                <div class="selectCustom-option" data-value="wb">Программирование по готовому дизайну</div>
+                                <div class="selectCustom-option" data-value="design">Создание дизайн-макета</div>
+                                <div class="selectCustom-option" data-value="be">Backend Engineer</div>
+                                <div class="selectCustom-option" data-value="qa">QA Engineer</div>
+                                <div class="selectCustom-option" data-value="un">Unicorn</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-4">
+                    <input type="text" class="contactform-text" id="text" placeholder="Опишите ваш бизнес в двух словах" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-4 checkbox-btn">
+                    <input type="checkbox" class="contactform-checkbox" id="checkbox" required>
+                    <label class="form-checkbox-label" for="checkbox">
+                        Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="submit-btn full-width-btn">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const elSelectCustom = document.getElementsByClassName("js-selectCustom")[0];
+    const elSelectCustomValue = elSelectCustom.children[0];
+    const elSelectCustomOptions = elSelectCustom.children[1];
+    const defaultLabel = elSelectCustomValue.getAttribute("data-value");
+
+    Array.from(elSelectCustomOptions.children).forEach(function (elOption) {
+        elOption.addEventListener("click", (e) => {
+            elSelectCustomValue.textContent = e.target.textContent;
+            elSelectCustom.classList.remove("isActive");
+            
+            elSelectCustomValue.classList.add('has-value');
+        });
+    });
+
+    elSelectCustomValue.addEventListener("click", (e) => {
+        e.stopPropagation();
+        elSelectCustom.classList.toggle("isActive");
+    });
+
+    document.addEventListener("click", (e) => {
+        const didClickedOutside = !elSelectCustom.contains(e.target);
+        if (didClickedOutside) {
+            elSelectCustom.classList.remove("isActive");
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && elSelectCustom.classList.contains("isActive")) {
+            elSelectCustom.classList.remove("isActive");
+        }
+    });
+</script>
