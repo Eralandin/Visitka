@@ -1,1 +1,116 @@
+@model PortfolioViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/portfolio/details.css" asp-append-version="true">
+}
+
 <partial name="_Backbtn" />
+
+<div id="portfolio-content">
+    <section class="portfolio-header">
+        <div class="container">
+            <p class="portfolio-name">@Model.Name</p>
+            @if (Model.releasedate != null)
+            {
+                <p class="release-date">релиз @Model.releasedate</p>
+            }
+            <div class="trend"><span class="trend-1">Направление</span><span class="trend-2">Направление</span></div>
+        </div>
+    </section>
+
+    <section class="portfolio-description">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 class="section-title"><span class="asterisk">*</span>Задача</h2>
+                </div>
+                <div class="col">
+                    <div class="section-content">@Model.TaskDescription</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2 class="section-title"><span class="asterisk">*</span>Решение</h2>
+                </div>
+                <div class="col">
+                    <div class="section-content">@Model.SolutionDescription</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="preview-image-section d-flex justify-content-center">
+        @if (Model.HasPreviewImage)
+        {
+            <div id="preview-image-wrapper" class="preview-image">
+                <img src="@Url.Action("GetPreviewImage", "Portfolio", new { id = Model.Id })" 
+                        alt="Превью изображение" class="fade-in" 
+                        onerror="handleImageError(this, 'preview-image-wrapper', 'Превью изображение')">
+            </div>
+        }
+    </section>
+    
+    <section class="image-section d-flex justify-content-center">
+        <div class="container">
+            <div class="image-container">
+                @if (Model.HasMainImage)
+                {
+                    <div id="main-image-wrapper" class="image-wrapper active">
+                        <img src="@Url.Action("GetMainImage", "Portfolio", new { id = Model.Id })" 
+                                alt="Главное изображение" class="fade-in" 
+                                onerror="handleImageError(this, 'main-image-wrapper', 'Главное изображение')">
+                    </div>
+                }
+                else
+                {
+                    <div id="main-image-wrapper" class="image-wrapper">
+                        <div class="image-placeholder">Главное изображение отсутствует</div>
+                    </div>
+                }
+                
+                @if (Model.HasMobileImage)
+                {
+                    <div id="mobile-image-wrapper" class="image-wrapper">
+                        <img src="@Url.Action("GetMobileImage", "Portfolio", new { id = Model.Id })" 
+                                alt="Мобильное изображение" class="fade-in"
+                                onerror="handleImageError(this, 'mobile-image-wrapper', 'Мобильное изображение')">
+                    </div>
+                }
+                else
+                {
+                    <div id="mobile-image-wrapper" class="image-wrapper">
+                        <div class="image-placeholder">Мобильное изображение отсутствует</div>
+                    </div>
+                }
+            </div>
+
+            <div class="image-buttons" id="image-buttons">
+                @if (Model.HasMainImage)
+                {
+                    <button class="image-button main active" data-type="main">Главная</button>
+                }
+                else
+                {
+                    <button class="image-button mobile" disabled>Главная</button>
+                }
+                
+                @if (Model.HasMobileImage)
+                {
+                    <button class="image-button mobile" data-type="mobile">Мобильная</button>
+                }
+                else
+                {
+                    <button class="image-button mobile" disabled>Мобильная</button>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+
+<partial name="_ContactForm" />
+
+<script src="~/js/portfolio_details.js"></script>
