@@ -26,3 +26,24 @@
     border-radius: 30px;
     border: 0.5px solid #ffffff;
 }
+
+.navbar-nav .nav-link {
+    text-decoration: underline;
+    text-decoration-color: black;
+    text-decoration-thickness: 0px;
+    text-underline-offset: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: white;
+}
+
+.navbar-nav .nav-link.active {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: white;
+}
