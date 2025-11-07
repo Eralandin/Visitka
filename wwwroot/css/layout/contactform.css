@@ -1,5 +1,10 @@
 .contactform-container {
-    height: 110vh;
+    height: 100%;
+    margin-bottom: 140px;
+}
+
+.form-text-container {
+    user-select: none;
 }
 
 .ft1 {

@@ -1,0 +1,173 @@
+#portfolio-content {
+    margin-top: 180px;
+}
+
+.portfolio-header {
+    min-height: 250px;
+    height: 100%;
+    margin-bottom: 250px;
+}
+    .portfolio-header .container {
+        position: relative;
+        min-height: 250px;
+    }
+
+.portfolio-name {
+    font-size: 64px;
+    font-weight: 600;
+    margin-bottom: 80px;
+}
+
+.release-date {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(158, 158, 158, 1);
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.trend {
+    position: absolute;
+    left: 0;
+    bottom: 1rem;
+}
+
+.trend span {
+    margin-right: 30px;
+    padding: 8px 24px 12px 24px;
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(158, 158, 158, 1);
+    border: 1px solid rgba(158, 158, 158, 1);
+    border-radius: 30.06px;
+}
+
+.portfolio-description {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 64px;
+    font-weight: 400;
+}
+
+.section-content {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+    color: rgba(193, 193, 193, 1);
+    padding-top: 32px;
+    padding-bottom: 100px;
+}
+
+.preview-image-section {
+    margin-bottom: 200px;
+}
+
+.image-section {
+    margin-bottom: 200px;
+}
+
+.image-container {
+    position: relative;
+    max-height: 80vh;
+    margin-bottom: 75px;
+}
+
+.preview-image {
+    width: 100vw;
+    object-fit: cover;
+}
+    .preview-image img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+.image-wrapper {
+    display: none;
+    text-align: center;
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+
+.image-wrapper::-webkit-scrollbar {
+    background-color: rgba(217, 217, 217, 0.42);
+    width: 6px;
+    border-radius: 5px;
+    transform: translateX(100px);
+}
+
+.image-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+}
+
+.image-wrapper.active {
+    display: block;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    min-height: auto;
+}
+
+.image-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.image-buttons .main {
+    margin-right: 32px;
+    padding: 8px 50px 10px 50px;
+}
+
+.image-buttons .mobile {
+    padding: 8px 30px 10px 30px;
+}
+
+.image-button {
+    background-color: black;
+    color: rgba(158, 158, 158, 1);
+    border-radius: 30px;
+    border: 1px solid rgba(158, 158, 158, 1);
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.image-button:hover {
+    background-color: rgba(255, 105, 5, 1);
+    border: 1px solid rgba(255, 105, 5, 1);
+    color: black;
+    border: 0;
+    transition: all 0.3 ease;
+}
+
+.image-button.active {
+    background-color: rgba(255, 105, 5, 1);
+    color: black;
+    border: 1px solid rgba(255, 105, 5, 1);
+}
+
+.image-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border: 1px solid black;
+    color: rgba(255, 105, 5, 1);
+    background-color: #000000;
+}
+
+.image-button:disabled:hover {
+    border: 1px solid black;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
