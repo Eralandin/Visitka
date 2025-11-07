@@ -145,15 +145,14 @@
 .image-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    border: 0;
+    border: 1px solid black;
     color: rgba(255, 105, 5, 1);
     background-color: #000000;
 }
 
 .image-button:disabled:hover {
-    border: 1px solid rgba(255, 105, 5, 1);
+    border: 1px solid black;
 }
-
 
 .fade-in {
     animation: fadeIn 0.5s ease-in;
