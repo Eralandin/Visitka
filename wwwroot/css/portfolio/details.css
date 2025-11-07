@@ -75,6 +75,15 @@
     margin-bottom: 75px;
 }
 
+.preview-image {
+    width: 100vw;
+    object-fit: cover;
+}
+    .preview-image img {
+        width: 100%;
+        object-fit: cover;
+    }
+
 .image-wrapper {
     display: none;
     text-align: center;
