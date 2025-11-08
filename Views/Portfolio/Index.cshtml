@@ -1,3 +1,5 @@
+@model IEnumerable<PortfolioViewModel>
+
 @{
     ViewData["Title"] = "Портфолио";
 }
@@ -9,73 +11,83 @@
 <partial name="_Backbtn" />
 
 <section class="slogan-section-portfolio">
-    <div class="container py-4 align-center">
-        <div class="d-flex justify-content-center">
-            <div class="slogan-portfolio">
-                <p class="text-start">
-                    <span class="slogan-text"><span class="asterisk">*</span>Продвигаемся <strong><span class="slogan-forward px-3 pb-2">вперед</span></strong> с каждым проектом</span>
-                </p>
-            </div>
+    <div class="container d-flex justify-content-center">
+        <div class="slogan-portfolio">
+            <p class="text-start">
+                <span class="slogan-text"><span class="asterisk">*</span>Продвигаемся <span class="slogan-forward">вперед</span> с каждым проектом</span>
+            </p>
         </div>
     </div>
 </section>
 
-<section class="portfolio-images-container">
-    <a class="project-link" asp-area="" asp-controller="Portfolio" asp-action="Details">
-        <img class="portfolio-image portfolio-image-1" src="~/portfoliopage/stich.png" alt="Stich project">
-        <img class="portfolio-arrow arrow-1" src="~/portfoliopage/Strelka.png" alt="Arrow">
-        <div class="new-badge">Новинка!</div>
-        <div class="project-description">
-            <h2 class="project-title">VK Видео / Интерфейс...</h2>
-            <div class="project-directions">
-                <div class="direction-item">направление</div>
-                <div class="direction-item">направление</div>
-            </div>
+<section class="portfolio-images-container container-fluid px-5">
+    <div class="row g-4" style="height: 100%">
+        @{
+            var portfolios = Model.Take(4).ToList();
+        }
+        <!-- Отладочная информация -->
+        <div style="display: none;">
+            @foreach (var p in portfolios)
+            {
+                <div>ID: @p.Id - Name: @p.Name</div>
+            }
         </div>
-    </a>
-
-    <a class="project-link" asp-area="" asp-controller="Portfolio" asp-action="Details">
-        <img class="portfolio-image portfolio-image-2" src="~/portfoliopage/balance.png" alt="Balance project">
-        <img class="portfolio-arrow arrow-2" src="~/portfoliopage/Strelka.png" alt="Arrow">
-        <div class="project-description-2">
-            <h2 class="project-title-2">ЖК Balance</h2>
-            <div class="project-directions-2">
-                <div class="direction-item-2">направление</div>
-                <div class="direction-item-2">направление</div>
-            </div>
+        <div class="col left-side d-flex flex-column">
+            @for (int i = 0; i < 2 && i < portfolios.Count; i++)
+            {
+                var portfolio = portfolios[i];
+                <div class="portfolio-card flex-fill" style="height: @(i == 0 ? "40%" : "60%")">
+                    <a class="project-link d-flex flex-column h-100 w-100" asp-area="" asp-controller="Portfolio" asp-action="Details" asp-route-id="@portfolio.Id">
+                        <div class="portfolio-image-part flex-fill position-relative">
+                            @if (portfolio.HasPreviewImage)
+                            {
+                                <img class="portfolio-image w-100 h-100" 
+                                    src="@Url.Action("GetPreviewImage", "Portfolio", new { id = portfolio.Id })" 
+                                    alt="@portfolio.Name"
+                                    style="object-fit: cover;">
+                            }
+                            <div class="new-badge">Новинка!</div>
+                            <img class="portfolio-arrow" src="~/portfoliopage/Arrow.png" alt="Arrow">
+                        </div>
+                        <div class="project-title-part flex-shrink-0">
+                            <p class="project-title">@portfolio.Name</p>
+                            <div class="project-directions">
+                                <div class="direction-item">направление</div>
+                                <div class="direction-item">направление</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
-    </a>
 
-    <a class="project-link" asp-area="" asp-controller="Portfolio" asp-action="Details">
-        <img class="portfolio-image portfolio-image-3" src="~/portfoliopage/china.png" alt="China project">
-        <img class="portfolio-arrow arrow-3" src="~/portfoliopage/Strelka.png" alt="Arrow">
-        <div class="project-description-3">
-            <h2 class="project-title-3">Imperial Trade</h2>
-            <div class="project-directions-3">
-                <div class="direction-item-3">направление</div>
-                <div class="direction-item-3">направление</div>
-            </div>
+        <div class="col right-side d-flex flex-column">
+            @for (int i = 2; i < 4 && i < portfolios.Count; i++)
+            {
+                var portfolio = portfolios[i];
+                <div class="portfolio-card flex-fill" style="height: @(i == 2 ? "60%" : "40%")">
+                    <a class="project-link d-flex flex-column h-100 w-100" asp-area="" asp-controller="Portfolio" asp-action="Details" asp-route-id="@portfolio.Id">
+                        <div class="portfolio-image-part flex-fill position-relative">
+                            @if (portfolio.HasPreviewImage)
+                            {
+                                <img class="portfolio-image w-100 h-100" 
+                                    src="@Url.Action("GetPreviewImage", "Portfolio", new { id = portfolio.Id })" 
+                                    alt="@portfolio.Name"
+                                    style="object-fit: cover;">
+                            }
+                            <div class="new-badge">Новинка!</div>
+                            <img class="portfolio-arrow" src="~/portfoliopage/Arrow.png" alt="Arrow">
+                        </div>
+                        <div class="project-title-part flex-shrink-0">
+                            <p class="project-title">@portfolio.Name</p>
+                            <div class="project-directions">
+                                <div class="direction-item">направление</div>
+                                <div class="direction-item">направление</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
-    </a>
-
-    <a class="project-link" asp-area="" asp-controller="Portfolio" asp-action="Details">
-        <img class="portfolio-image portfolio-image-4" src="~/portfoliopage/shapka.png" alt="Shapka project">
-        <img class="portfolio-arrow arrow-4" src="~/portfoliopage/Strelka.png" alt="Arrow">
-        <div class="project-description-4">
-            <h2 class="project-title-4">Pyrobattle / Промо</h2>
-            <div class="project-directions-4">
-                <div class="direction-item-4">направление</div>
-                <div class="direction-item-4">направление</div>
-            </div>
-        </div>
-    </a>
-
-    <a class="project-link view-all-link" asp-area="" asp-controller="Portfolio" asp-action="Index">
-        <div class="view-all-text">Посмотреть всё</div>
-    </a>
-</section>
-
-
-<section>
-    <partial name="_ContactForm" />
+    </div>
 </section>

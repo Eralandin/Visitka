@@ -65,12 +65,6 @@
                                 onerror="handleImageError(this, 'main-image-wrapper', 'Главное изображение')">
                     </div>
                 }
-                else
-                {
-                    <div id="main-image-wrapper" class="image-wrapper">
-                        <div class="image-placeholder">Главное изображение отсутствует</div>
-                    </div>
-                }
                 
                 @if (Model.HasMobileImage)
                 {
@@ -78,12 +72,6 @@
                         <img src="@Url.Action("GetMobileImage", "Portfolio", new { id = Model.Id })" 
                                 alt="Мобильное изображение" class="fade-in"
                                 onerror="handleImageError(this, 'mobile-image-wrapper', 'Мобильное изображение')">
-                    </div>
-                }
-                else
-                {
-                    <div id="mobile-image-wrapper" class="image-wrapper">
-                        <div class="image-placeholder">Мобильное изображение отсутствует</div>
                     </div>
                 }
             </div>

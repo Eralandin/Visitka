@@ -19,6 +19,7 @@ namespace Visitka.Controllers
         public async Task<IActionResult> Index()
         {
             var portfolios = await _context.Portfolios
+                .OrderBy(p => p.Id)
                 .Select(p => new PortfolioViewModel
                 {
                     Id = p.Id,
