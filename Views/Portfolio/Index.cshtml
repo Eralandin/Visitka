@@ -25,13 +25,6 @@
         @{
             var portfolios = Model.Take(4).ToList();
         }
-        <!-- Отладочная информация -->
-        <div style="display: none;">
-            @foreach (var p in portfolios)
-            {
-                <div>ID: @p.Id - Name: @p.Name</div>
-            }
-        </div>
         <div class="col left-side d-flex flex-column">
             @for (int i = 0; i < 2 && i < portfolios.Count; i++)
             {
