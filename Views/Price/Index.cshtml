@@ -1,3 +1,5 @@
+@model IEnumerable<PriceViewModel>
+
 @{
     ViewData["Title"] = "Цена";
 }
@@ -6,74 +8,39 @@
     <link rel="stylesheet" href="~/css/price/style.css" asp-append-version="true">
 }
 
-<partial name="_Backbtn" />
+<section style="margin-bottom: 100px;">
+    <partial name="_Backbtn" />
+</section>
 
 <section class="price-section">
-    <div class="container custom-price-container py-4">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="price-containers-wrapper">
-                    <div class="price-container-item">
-                        <div class="price-card position-relative">
-                            <div class="gradient-overlay"></div>
-                            <img src="~/price/render_1.png" alt="Разработка сайта" class="price-card-image-1">
-                            <div class="price-card-content">
-                                <div class="price-card-label_1"><span class="asterisk">*</span>Разработка сайта.</div>
-                                <div class="price-card-text_1_1">Создадим современный и функциональный сайт под
-                                    ключ.<br>С уникальным дизайном и качественной мобильной версией</div>
-                                <button class="order-button">Заказать</button>
-                                <div class="price-card-text_1_2">Минимальный бюджет*</div>
-                                <div class="price-card-price_1">от 50 000₽</div>
-                            </div>
+    <div class="container-fluid custom-price-container d-flex justify-content-center flex-wrap">
+        @foreach (var p in Model)
+        {
+            <div class="price-card">
+                <div class="gradient-overlay"></div>
+                <div class="row h-100">
+                    <div class="col-6 price-card-content justify-content-start">
+                        <div class="price-card-fp">
+                            <div class="price-card-label"><span class="asterisk">*</span>@p.Name.</div>
+                            <p class="price-card-text">
+                                @p.Description
+                            </p>
+                            <a class="order-link" asp-area="" asp-controller="Request" asp-action="Index">Заказать</a>
+                        </div>
+                        <div class="price-card-price-container">
+                            <div class="price-card-price-label">Минимальный бюджет*</div>
+                            <div class="price-card-price">от @p.MinCost₽</div>
                         </div>
                     </div>
-                    <div class="price-container-item">
-                        <div class="price-card position-relative">
-                        <img src="~/price/render_2.png" alt="Разработка сайта" class="price-card-image-2">
-                            <div class="price-card-content">
-                                <div class="price-card-label_2"><span class="asterisk">*</span>Создание фирменного стиля.</div>
-                                <div class="price-card-text_2_1">Получите неповторимую визуальную идентичность вашего бренда,<br>которая выделит вас среди конкурентов.</div>
-                                <button class="order-button">Заказать</button>
-                                <div class="price-card-text_2_2">Минимальный бюджет*</div>
-                                <div class="price-card-price_2">от 120 000₽</div>
-                            </div>
-                            </div>
-                    </div>
-                    <div class="price-container-item">
-                        <div class="price-card position-relative">
-                            <img src="~/price/render_3.png" alt="Разработка сайта" class="price-card-image-3">
-                            <div class="price-card-content">
-                                <div class="price-card-label_3"><span class="asterisk">*</span>Разработка автоматизированных систем.</div>
-                                <div class="price-card-text_3_1">Создадим современный и функциональный сайт под ключ.<br>С уникальным дизайном и качественной мобильной версией</div>
-                                <button class="order-button">Заказать</button>
-                                <div class="price-card-text_3_2">Минимальный бюджет*</div>
-                                <div class="price-card-price_3">от 250 000₽</div>
-                            </div></div>
-                    </div>
-                    <div class="price-container-item">
-                        <div class="price-card position-relative">
-                            <div class="price-card-content">
-                                <div class="price-card-label_4"><span class="asterisk">*</span>Разработка 3D-элементов.</div>
-                                <div class="price-card-text_4_1">Создадим современный и функциональный сайт под ключ.<br>С уникальным дизайном и качественной мобильной версией</div>
-                                <button class="order-button">Заказать</button>
-                                <div class="price-card-text_4_2">Минимальный бюджет*</div>
-                                <div class="price-card-price_4">от 9000₽</div>
-                            </div></div>
-                    </div>
-                    <div class="price-container-item">
-                        <div class="price-card position-relative">
-                        <img src="~/price/render_5.png" alt="Разработка сайта" class="price-card-image-5">
-                            <div class="price-card-content">
-                                <div class="price-card-label_5"><span class="asterisk">*</span>Поддержка проекта.</div>
-                                <div class="price-card-text_5_1">Создадим современный и функциональный сайт под ключ.<br>С уникальным дизайном и качественной мобильной версией</div>
-                                <button class="order-button">Заказать</button>
-                                <div class="price-card-text_5_2">Минимальный бюджет*</div>
-                                <div class="price-card-price_5">от 1000₽/час</div>
-                            </div></div>
+                    <div class="col-6 price-card-img-content justify-content-end">
+                        <img src="~/price/render_1.png" alt="Разработка сайта" class="price-card-image">
+                        <img src="@Url.Action("GetPreviewImage", "Price", new { id = p.Id })" 
+                            alt="Превью изображение" class="price-card-image" 
+                            onerror="handleImageError(this, 'preview-image-wrapper', 'Превью изображение')">
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </section>
 
