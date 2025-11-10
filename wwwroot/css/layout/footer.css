@@ -10,6 +10,19 @@ footer{
     position: relative;
 }
 
+footer .nav-link {
+    text-decoration: underline;
+    text-decoration-color: #FF6905;
+    text-decoration-thickness: 0px;
+    text-underline-offset: 5px;
+    transition: all 0.3s ease;
+}
+
+footer .nav-link:hover {
+    text-decoration-color: black;
+    text-decoration-thickness: 0px;
+}
+
 .navbar-nav .nav-item {
     font-family: "Manrope", sans-serif;
     font-size: 20px;
