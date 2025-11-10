@@ -38,6 +38,7 @@ namespace Visitka.Models
         public bool HasPreviewImage { get; set; }
         public bool HasMainImage { get; set; }
         public bool HasMobileImage { get; set; }
+        public string Category { get; set; } = string.Empty;
         public int releasedate { get; set; }
     }
 }

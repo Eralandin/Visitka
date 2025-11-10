@@ -11,6 +11,8 @@ namespace Visitka.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Portfolio> Portfolios { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<PortfolioCategories> PortfolioCategories { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<AdminUser> AdminUsers { get; set; }

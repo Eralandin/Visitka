@@ -29,14 +29,24 @@ namespace Visitka.Controllers
                     HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
                     HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
                     HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0,
-                    releasedate = p.releasedate
+                    releasedate = p.releasedate,
+
+
+                    Category = string.Join(", ",
+                        _context.PortfolioCategories
+                            .Where(pc => pc.PortfolioId == p.Id)
+                            .Join(_context.Categories,
+                                pc => pc.CategoryId,
+                                c => c.Id,
+                                (pc, c) => c.Name)
+                    )
                 })
                 .ToListAsync();
 
             return View(portfolios);
         }
 
-        // localhost:8218/portfolio/details/1
+
         [Route("Details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
@@ -51,7 +61,16 @@ namespace Visitka.Controllers
                     HasPreviewImage = p.PreviewImage != null && p.PreviewImage.Length > 0,
                     HasMainImage = p.MainImage != null && p.MainImage.Length > 0,
                     HasMobileImage = p.MobileImage != null && p.MobileImage.Length > 0,
-                    releasedate = p.releasedate
+                    releasedate = p.releasedate,
+
+                    Category = string.Join(", ",
+                        _context.PortfolioCategories
+                            .Where(pc => pc.PortfolioId == p.Id)
+                            .Join(_context.Categories,
+                                pc => pc.CategoryId,
+                                c => c.Id,
+                                (pc, c) => c.Name)
+                    )
                 })
                 .FirstOrDefaultAsync();
 
@@ -62,6 +81,7 @@ namespace Visitka.Controllers
 
             return View(portfolio);
         }
+
 
 
         // GET: /portfolio/image/preview/1
