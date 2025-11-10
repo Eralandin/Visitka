@@ -18,7 +18,12 @@
             {
                 <p class="release-date">релиз @Model.releasedate</p>
             }
-            <div class="trend"><span class="trend-1">Направление</span><span class="trend-2">Направление</span></div>
+            <div class="trend">
+                @foreach (var cat in @Model.Category.Split(", "))
+                    {
+                        <span class="trend-item">@cat</span>
+                    }
+            </div>
         </div>
     </section>
 

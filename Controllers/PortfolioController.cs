@@ -39,7 +39,9 @@ namespace Visitka.Controllers
                                 pc => pc.CategoryId,
                                 c => c.Id,
                                 (pc, c) => c.Name)
-                    )
+                    ),
+                    isnew = p.isnew,
+                    onmainpage = p.onmainpage
                 })
                 .ToListAsync();
 
@@ -70,7 +72,9 @@ namespace Visitka.Controllers
                                 pc => pc.CategoryId,
                                 c => c.Id,
                                 (pc, c) => c.Name)
-                    )
+                    ),
+                    isnew = p.isnew,
+                    onmainpage = p.onmainpage
                 })
                 .FirstOrDefaultAsync();
 

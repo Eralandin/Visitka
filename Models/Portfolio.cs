@@ -26,6 +26,8 @@ namespace Visitka.Models
 
         public byte[]? MobileImage { get; set; }
         public int releasedate { get; set; }
+        public bool isnew { get; set; }
+        public bool onmainpage { get; set; }
     }
 
 
@@ -40,5 +42,7 @@ namespace Visitka.Models
         public bool HasMobileImage { get; set; }
         public string Category { get; set; } = string.Empty;
         public int releasedate { get; set; }
+        public bool isnew { get; set; }
+        public bool onmainpage { get; set; }
     }
 }

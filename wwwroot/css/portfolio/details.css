@@ -89,11 +89,13 @@
     text-align: center;
     overflow-y: scroll;
     max-height: 80vh;
+    border-radius: 10px;
+    padding-right: 10px;
 }
 
 .image-wrapper::-webkit-scrollbar {
     background-color: rgba(217, 217, 217, 0.42);
-    width: 6px;
+    width: 5px;
     border-radius: 5px;
     transform: translateX(100px);
 }
@@ -110,6 +112,7 @@
 .image-wrapper img {
     max-width: 100%;
     min-height: auto;
+    width: 100%;
 }
 
 .image-buttons {

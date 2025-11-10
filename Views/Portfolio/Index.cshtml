@@ -39,14 +39,16 @@
                                     alt="@portfolio.Name"
                                     style="object-fit: cover;">
                             }
-                            <div class="new-badge">Новинка!</div>
+                            <div class="new-badge" style="display: @(portfolio.isnew == true ? "block" : "none")">Новинка!</div>
                             <img class="portfolio-arrow" src="~/portfoliopage/Arrow.png" alt="Arrow">
                         </div>
                         <div class="project-title-part flex-shrink-0">
                             <p class="project-title">@portfolio.Name</p>
                             <div class="project-directions">
-                                <div class="direction-item">направление</div>
-                                <div class="direction-item">направление</div>
+                                @foreach (var cat in portfolio.Category.Split(", "))
+                                {
+                                    <div class="direction-item">@cat</div>
+                                }
                             </div>
                         </div>
                     </a>
@@ -68,14 +70,16 @@
                                     alt="@portfolio.Name"
                                     style="object-fit: cover;">
                             }
-                            <div class="new-badge">Новинка!</div>
+                            <div class="new-badge" style="display: @(portfolio.isnew == true ? "block" : "none")">Новинка!</div>
                             <img class="portfolio-arrow" src="~/portfoliopage/Arrow.png" alt="Arrow">
                         </div>
                         <div class="project-title-part flex-shrink-0">
                             <p class="project-title">@portfolio.Name</p>
                             <div class="project-directions">
-                                <div class="direction-item">направление</div>
-                                <div class="direction-item">направление</div>
+                                @foreach (var cat in portfolio.Category.Split(", "))
+                                {
+                                    <div class="direction-item">@cat</div>
+                                }
                             </div>
                         </div>
                     </a>

@@ -35,6 +35,10 @@ body {
     max-width: 100%;
 }
 
+.left-side, .right-side {
+    padding-top: 20px;
+}
+
 .col {
     position: relative;
     overflow: hidden;
@@ -42,12 +46,21 @@ body {
 
 .project-link {
     text-decoration: none;
+    transition: all 0.3s ease;
 }
+    .project-link:hover {
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+    }
+    .project-link:hover .portfolio-image-part {
+        box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.25);
+    }
 
 .portfolio-image-part {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .portfolio-image {

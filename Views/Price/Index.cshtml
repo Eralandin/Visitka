@@ -18,7 +18,7 @@
         {
             <div class="price-card">
                 <div class="gradient-overlay"></div>
-                <div class="row h-100">
+                <div class="row w-100 h-100">
                     <div class="col-6 price-card-content justify-content-start">
                         <div class="price-card-fp">
                             <div class="price-card-label"><span class="asterisk">*</span>@p.Name.</div>
@@ -32,8 +32,7 @@
                             <div class="price-card-price">от @p.MinCost₽</div>
                         </div>
                     </div>
-                    <div class="col-6 price-card-img-content justify-content-end">
-                        @* <img src="~/price/render_1.png" alt="Разработка сайта" class="price-card-image"> *@
+                    <div class="col-6 price-card-img-content justify-content-end">  
                         <img src="@Url.Action("GetPreviewImage", "Price", new { id = p.Id })" 
                             alt="@p.Name" class="price-card-image" 
                             onerror="handleImageError(this, 'preview-image-wrapper', 'Превью изображение')">
