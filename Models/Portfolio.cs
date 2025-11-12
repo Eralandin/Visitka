@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Visitka.Models
 {
@@ -45,6 +44,6 @@ namespace Visitka.Models
         public int releasedate { get; set; }
         public bool isnew { get; set; }
         public bool onmainpage { get; set; }
-        public byte[]? ppimage { get; set; }
+        public bool HasPPImage { get; set; }
     }
 }

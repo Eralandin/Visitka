@@ -42,7 +42,7 @@ namespace Visitka.Controllers
                     ),
                     isnew = p.isnew,
                     onmainpage = p.onmainpage,
-                    ppimage = p.ppimage,
+                    HasPPImage = p.ppimage != null && p.ppimage.Length > 0
                 })
                 .ToListAsync();
 
@@ -76,7 +76,7 @@ namespace Visitka.Controllers
                     ),
                     isnew = p.isnew,
                     onmainpage = p.onmainpage,
-                    ppimage = p.ppimage,
+                    HasPPImage = p.ppimage != null && p.ppimage.Length > 0
                 })
                 .FirstOrDefaultAsync();
 
@@ -130,7 +130,6 @@ namespace Visitka.Controllers
         {
             if (imageData == null || imageData.Length == 0)
             {
-                // Можно вернуть placeholder изображение
                 return NotFound($"Image {imageType} not found for portfolio {name}");
             }
 
