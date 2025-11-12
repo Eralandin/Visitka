@@ -41,7 +41,8 @@ namespace Visitka.Controllers
                                 (pc, c) => c.Name)
                     ),
                     isnew = p.isnew,
-                    onmainpage = p.onmainpage
+                    onmainpage = p.onmainpage,
+                    ppimage = p.ppimage,
                 })
                 .ToListAsync();
 
@@ -74,7 +75,8 @@ namespace Visitka.Controllers
                                 (pc, c) => c.Name)
                     ),
                     isnew = p.isnew,
-                    onmainpage = p.onmainpage
+                    onmainpage = p.onmainpage,
+                    ppimage = p.ppimage,
                 })
                 .FirstOrDefaultAsync();
 
