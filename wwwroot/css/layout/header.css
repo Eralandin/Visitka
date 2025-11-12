@@ -5,8 +5,12 @@
 
 .navbar {
     padding: 55px;
-    height: 140px;
+    /* height: 140px; */
+    height: 100%;
     min-height: 140px;
+    background-color: #000000 !important;
+    z-index: 30;
+
 }
 
 .navbar-brand {
@@ -50,4 +54,21 @@ header .navbar-nav .nav-link.active {
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
     text-decoration-color: white;
+}
+
+@media (max-width: 575.98px) {
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .navbar-collapse {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .nav-send {
+        border: none !important;
+        padding: .5rem 1rem !important;
+        padding-left: 0 !important;
+    }
 }

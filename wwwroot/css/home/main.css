@@ -50,8 +50,9 @@
 }
 
 .i-feel-logo {
-    width: 1250px;
+    width: 75%;
     height: 550px;
+    /* height: 50vh; */
     object-fit: cover;
     justify-self: center;
 }
@@ -318,4 +319,130 @@
     border-radius: 37px;
     font-size: 24px;
     font-weight: 400;
+}
+
+@media (max-width: 575.98px) {
+    .slogan {
+        font-size: 32px;
+        width: 100%;
+    }
+
+    .slogan-site {
+        height: auto;
+        padding: 5px 20px 7px 20px;
+    }
+
+    .text-start {
+        padding-right: 20%;
+    }
+
+    .text-end {
+        padding-left: 20%;
+    }
+
+    .slogan-section {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .order-button {
+        font-size: 20px;
+    }
+
+    .phrase-section {
+        height: 500px;
+        margin-bottom: -100px;
+    }
+
+    .phrase-text {
+        font-size: 18px;
+    }
+
+    .first-part-section {
+        margin-bottom: 30px;
+    }
+
+    .i-feel-logo {
+        width: 100vw;
+        height: 30vh;
+    }
+
+    .first-card {
+        margin-bottom: 30px;
+    }
+    
+    .first-card-body {
+        padding-left: 1rem;
+    }
+
+    .fc-p2 {
+        font-size: 32px;
+    }
+
+    .fc-a {
+        left: 1rem;
+        font-size: 18px;
+        padding: 10px 30px;
+        width: auto;
+        height: auto;
+    }
+
+    .portfolio-container .col-md-6 {
+        margin-bottom: 1.5rem;
+    }
+
+    .portfolio-container .col-12 {
+        height: 75%;
+    }
+
+    .portfolio-container .col-6 {
+        height: 50%;
+    }
+
+    .tc-p1 {
+        font-size: 13px;
+    }
+
+    .foc-p1 {
+        font-size: 13px;
+    }
+
+    .sc-p2, .tc-p2, .foc-p2 {
+        font-size: 30px;
+    }
+
+    .sc-img, .foc-img {
+        width: 10%;
+        height: 10%;
+        right: 0.5rem;
+    }
+
+    .last-p {
+        font-size: 24px;
+    }
+
+    .last-span {
+        padding: 3px 15px 5px 15px;
+        height: auto;
+    }
+
+    .last-section {
+        height: 70vh;
+    }
+
+    .last-question {
+        margin-bottom: 20px;
+    }
+
+    .text-input {
+        font-size: 18px;
+    }
+
+    .submit-btn {
+        font-size: 18px;
+    }
+
+    .form-container {
+        height: 50px;
+    }
 }

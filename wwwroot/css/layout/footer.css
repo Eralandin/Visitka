@@ -53,3 +53,9 @@ footer .nav-link:hover {
     right: 0;
     user-select: none;
 }
+
+@media (max-width: 575.98px) {
+    .navbar-nav {
+        flex-wrap: wrap;
+    }
+}

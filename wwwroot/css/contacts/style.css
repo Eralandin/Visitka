@@ -68,21 +68,30 @@ body {
     font-size: 48px;
     font-weight: 700;
 }
+    .telegram:hover {
+        color: #1495FF;
+    }
 
 .whatsapp {
     color: #56BC12;
     font-size: 48px;
     font-weight: 700;
 }
+    .whatsapp:hover {
+        color: #56BC12;
+    }
 
 .vk {
     color: #24ABFF;
     font-size: 48px;
     font-weight: 700;
 }
+    .vk:hover {
+        color: #24ABFF;
+    }
 
 .messenger-link:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .specialists-text {
@@ -95,12 +104,13 @@ body {
 }
 
 .specialists-gallery {
-    margin-top: 40px;
+    margin-top: 90px;
     display: flex;
     align-items: flex-start;
-    height: 877px;
+    height: 900px;
     position: relative;
-    margin-left: -100px;
+    margin-bottom: 150px;
+    width: 100%;
 }
 
 .image-item {
@@ -108,8 +118,8 @@ body {
     transition: all 0.5s ease;
     cursor: pointer;
     opacity: 1;
-    top: 58.7px;
     flex-shrink: 0;
+    height: 100%;
 }
 
 .image-item img {
@@ -119,8 +129,7 @@ body {
 }
 
 .image-item.active {
-    width: 659px;
-    height: 877.09px;
+    width: 45%;
     margin: 0 15px;
     position: relative;
 }
@@ -148,14 +157,22 @@ body {
 
 .image-item:not(.active) {
     width: 148.83px;
-    height: 877.09px;
+    height: 100%;
     margin: 0 15px;
 }
 
+.first-item {
+    margin-left: 0 !important;
+}
+
+.last-item {
+    margin-right: 0 !important;
+}
+/* 
 .specialists-gallery .image-item:first-child {
     margin-left: 100px;
 }
 
 .specialists-gallery .image-item:last-child {
     margin-right: 100px;
-}
+} */
