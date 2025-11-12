@@ -28,6 +28,7 @@ namespace Visitka.Models
         public int releasedate { get; set; }
         public bool isnew { get; set; }
         public bool onmainpage { get; set; }
+        public byte[]? ppimage { get; set; }
     }
 
 
@@ -44,5 +45,6 @@ namespace Visitka.Models
         public int releasedate { get; set; }
         public bool isnew { get; set; }
         public bool onmainpage { get; set; }
+        public byte[]? ppimage { get; set; }
     }
 }
