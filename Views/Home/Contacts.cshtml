@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "Контакты";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/contacts/style.css" asp-append-version="true">
+}
+
+<partial name="_Backbtn" />
+
+<section class="slogan-section-contacts">
+    <div class="container py-4 align-center">
+        <div class="d-flex justify-content-center">
+            <div class="slogan-contacts-1">
+                <p class="text-start">
+                    <span class="slogan-text"><span class="asterisk">*</span>Наши контакты</span>
+                </p>
+            </div>
+        </div>
+        <div class="contact-subtitle">
+            <p>Мы готовы ответить на ваши<br>вопросы и воплотить ваши идеи!</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-phone">
+                <p>+7 913 897 71 53</p>
+            </div>
+            <div class="messenger-links">
+                <a href="#" class="messenger-link telegram">Telegram</a>
+                <a href="#" class="messenger-link whatsapp">WhatsApp</a>
+                <a href="#" class="messenger-link vk">VK</a>
+            </div>
+        </div>
+        <div class="specialists-text">
+            <p class="text-start">
+                <span class="slogan-text"><span class="asterisk">*</span>Наши специалисты</span>
+            </p>
+        </div>
+        <div class="specialists-gallery">
+            <div class="image-item active" data-index="0" data-name="ИМЯ ФАМИЛИЯ"
+                data-description="СОСАЛКА">
+                <img src="~/contacts/image.png" alt="Специалист 1">
+            </div>
+            <div class="image-item" data-index="1" data-name="ИМЯ ФАМИЛИЯ"
+                data-description="СОСАЛКА">
+                <img src="~/contacts/image.png" alt="Специалист 2">
+            </div>
+            <div class="image-item" data-index="2" data-name="ИМЯ ФАМИЛИЯ"
+                data-description="СОСАЛКА">
+                <img src="~/contacts/image.png" alt="Специалист 3">
+            </div>
+            <div class="image-item" data-index="3" data-name="ИМЯ ФАМИЛИЯ"
+                data-description="СОСАЛКА">
+                <img src="~/contacts/image.png" alt="Специалист 4">
+            </div>
+            <div class="image-item" data-index="4" data-name="ИМЯ ФАМИЛИЯ"
+                data-description="СОСАЛКА">
+                <img src="~/contacts/image.png" alt="Специалист 5">
+            </div>
+        </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/contact.js"></script>
+}
