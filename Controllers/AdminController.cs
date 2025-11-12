@@ -4,7 +4,7 @@ using Visitka.Filters;
 using Visitka.Models;
 using Visitka.Services;
 
-namespace YourProjectName.Controllers
+namespace Visitka.Controllers
 {
     [ApiController]
     [Route("admin")]
