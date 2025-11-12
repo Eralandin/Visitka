@@ -1,0 +1,161 @@
+body {
+    font-family: "Manrope", sans-serif;
+    font-size: 20px;
+}
+
+.slogan-contacts-1 {
+    width: 100%;
+    text-align: left;
+    font-style: medium;
+    font-size: 40px;
+    font-weight: 300;
+}
+
+.contact-subtitle {
+    margin-top: 85px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: 0%;
+    text-align: left;
+    vertical-align: middle;
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 98px;
+    width: 100%;
+}
+
+.contact-phone {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 44px;
+    line-height: normal;
+    letter-spacing: 0%;
+    vertical-align: middle;
+}
+
+.messenger-links {
+    display: flex;
+    align-items: center;
+    gap: 152px;
+    margin-left: 152px;
+    position: relative;
+    top: -10px;
+}
+
+.messenger-link {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 44px;
+    line-height: normal;
+    letter-spacing: 0%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.telegram {
+    color: #1495FF;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.whatsapp {
+    color: #56BC12;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.vk {
+    color: #24ABFF;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.messenger-link:hover {
+    text-decoration: underline;
+}
+
+.specialists-text {
+    margin-top: 140px;
+    width: 100%;
+    text-align: left;
+    font-style: medium;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.specialists-gallery {
+    margin-top: 40px;
+    display: flex;
+    align-items: flex-start;
+    height: 877px;
+    position: relative;
+    margin-left: -100px;
+}
+
+.image-item {
+    position: relative;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    opacity: 1;
+    top: 58.7px;
+    flex-shrink: 0;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-item.active {
+    width: 659px;
+    height: 877.09px;
+    margin: 0 15px;
+    position: relative;
+}
+
+.image-item.active::after {
+    content: attr(data-description);
+    position: absolute;
+    bottom: 39px;
+    left: 39px;
+    font-size: 28px;
+    font-family: "Manrope", sans-serif;
+    color: white;
+}
+
+.image-item.active::before {
+    content: attr(data-name);
+    position: absolute;
+    bottom: calc(39px + 28px + 7px);
+    left: 39px;
+    font-size: 28px;
+    font-family: "Manrope", sans-serif;
+    color: white;
+    font-weight: 700;
+}
+
+.image-item:not(.active) {
+    width: 148.83px;
+    height: 877.09px;
+    margin: 0 15px;
+}
+
+.specialists-gallery .image-item:first-child {
+    margin-left: 100px;
+}
+
+.specialists-gallery .image-item:last-child {
+    margin-right: 100px;
+}
