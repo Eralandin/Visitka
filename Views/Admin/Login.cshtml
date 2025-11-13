@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Вход администратора";
+    Layout = null; // Без шапки и подвала
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+
+    <div class="card shadow-lg border-0 rounded-4" style="width: 380px;">
+        <div class="card-body p-4">
+            <h3 class="text-center mb-4">Панель администратора</h3>
+
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Имя пользователя</label>
+                    <input type="text" id="username" name="username" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" id="password" name="password" class="form-control" required />
+                </div>
+
+                <div class="d-grid mb-2">
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </div>
+            </form>
+
+            <!-- Кнопка возврата на главную -->
+            <div class="d-grid">
+                <a href="/" class="btn btn-secondary">На главную</a>
+            </div>
+
+            <div id="loginError" class="alert alert-danger mt-3 d-none"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorDiv = document.getElementById("loginError");
+            errorDiv.classList.add("d-none");
+
+            try {
+                const response = await fetch("/admin/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password })
+                });
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch {
+                    throw new Error("Некорректный ответ от сервера");
+                }
+
+                if (!response.ok) {
+                    errorDiv.classList.remove("d-none");
+                    errorDiv.textContent = data?.error || "Ошибка входа";
+                    return;
+                }
+
+                // Авторизация через сессию выполнена → редирект на панель
+                window.location.href = "/admin/panel";
+
+            } catch (err) {
+                errorDiv.classList.remove("d-none");
+                errorDiv.textContent = err.message || "Ошибка соединения с сервером";
+            }
+        });
+    </script>
+
+</body>
+</html>

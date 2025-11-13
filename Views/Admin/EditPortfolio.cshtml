@@ -1,0 +1,182 @@
+﻿@model Visitka.Models.Portfolio
+@{
+    var title = Model.Id > 0 ? "Редактирование портфолио" : "Создание портфолио";
+    ViewData["Title"] = title;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+    <div class="container py-4">
+        <h2 class="mb-4">@ViewData["Title"]</h2>
+        @{
+            var formAction = Model.Id > 0 ? $"/admin/portfolio/edit/{Model.Id}" : "/admin/portfolio/add";
+        }
+        <form method="post" enctype="multipart/form-data" action="@formAction" onsubmit="return validateForm();">
+            @Html.AntiForgeryToken()
+
+            <!-- Текстовые поля -->
+            <div class="mb-3">
+                <label class="form-label">Название</label>
+                <input type="text" name="Name" class="form-control" value="@Model.Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Описание задачи</label>
+                <textarea name="TaskDescription" class="form-control" rows="3" required>@Model.TaskDescription</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Описание решения</label>
+                <textarea name="SolutionDescription" class="form-control" rows="3" required>@Model.SolutionDescription</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Дата релиза</label>
+                <input type="number" name="releasedate" class="form-control" value="@Model.releasedate" />
+            </div>
+
+            <!-- Категории -->
+            <div class="mb-3">
+                <label class="form-label">Категории (выберите хотя бы одну)</label>
+                <div>
+                    @foreach (var cat in ViewBag.AllCategories as List<Visitka.Models.Category>)
+                    {
+                        var isChecked = (ViewBag.SelectedCategoryIds as List<int>).Contains(cat.Id) ? "checked" : "";
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input category-checkbox" type="checkbox" name="CategoryIds" value="@cat.Id" @isChecked />
+                            <label class="form-check-label">@cat.Name</label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Чекбоксы -->
+            <div class="mb-3">
+                <input type="hidden" name="onmainpage" value="false" />
+                <input type="checkbox" class="form-check-input" id="onmainpage" name="onmainpage" value="true" @(Model.onmainpage ? "checked" : "") />
+                <label class="form-check-label" for="onmainpage">На главной</label>
+            </div>
+
+            <div class="mb-3">
+                <input type="hidden" name="isnew" value="false" />
+                <input type="checkbox" class="form-check-input" id="isnew" name="isnew" value="true" @(Model.isnew ? "checked" : "") />
+                <label class="form-check-label" for="isnew">Новое</label>
+            </div>
+
+            <hr />
+
+            <!-- Изображения с превью -->
+            <div class="mb-3">
+                <label class="form-label">Превью изображение</label>
+                <input type="file" class="form-control" id="previewImageInput" name="previewImage" accept="image/*" />
+                <div class="mt-2">
+                    <img id="previewImagePreview" src="@(
+                        Model.PreviewImage != null
+                            ? "data:image/png;base64," + Convert.ToBase64String(Model.PreviewImage)
+                            : (Model.Id == 0 ? Url.Content("~/default.jpg") : "")
+                    )" width="150" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Основное изображение</label>
+                <input type="file" class="form-control" id="mainImageInput" name="mainImage" accept="image/*" />
+                <div class="mt-2">
+                    <img id="mainImagePreview" src="@(
+                        Model.MainImage != null
+                            ? "data:image/png;base64," + Convert.ToBase64String(Model.MainImage)
+                            : (Model.Id == 0 ? Url.Content("~/default.jpg") : "")
+                    )" width="150" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Мобильное изображение</label>
+                <input type="file" class="form-control" id="mobileImageInput" name="mobileImage" accept="image/*" />
+                <div class="mt-2">
+                    <img id="mobileImagePreview" src="@(
+                        Model.MobileImage != null
+                            ? "data:image/png;base64," + Convert.ToBase64String(Model.MobileImage)
+                            : (Model.Id == 0 ? Url.Content("~/default.jpg") : "")
+                    )" width="150" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">PPImage</label>
+                <input type="file" class="form-control" id="ppImageInput" name="ppImage" accept="image/*" />
+                <div class="mt-2">
+                    <img id="ppImagePreview" src="@(
+                        Model.ppimage != null
+                            ? "data:image/png;base64," + Convert.ToBase64String(Model.ppimage)
+                            : (Model.Id == 0 ? Url.Content("~/default.jpg") : "")
+                    )" width="150" />
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <button type="submit" class="btn btn-success me-2">Сохранить</button>
+                <a href="/admin/panel" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setupImagePreview(inputId, imgId) {
+            const input = document.getElementById(inputId);
+            const img = document.getElementById(imgId);
+
+            input.addEventListener('change', function () {
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        }
+
+        // Настраиваем все превью
+        setupImagePreview('previewImageInput', 'previewImagePreview');
+        setupImagePreview('mainImageInput', 'mainImagePreview');
+        setupImagePreview('mobileImageInput', 'mobileImagePreview');
+        setupImagePreview('ppImageInput', 'ppImagePreview');
+
+        // Валидация формы
+        function validateForm() {
+            // Проверка хотя бы одной категории
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            let anyChecked = false;
+            checkboxes.forEach(cb => { if(cb.checked) anyChecked = true; });
+
+            if (!anyChecked) {
+                alert('Выберите хотя бы одну категорию!');
+                return false; // блокируем отправку формы
+            }
+
+            // Проверка текстовых полей (Name, TaskDescription, SolutionDescription)
+            const name = document.querySelector('input[name="Name"]').value.trim();
+            const task = document.querySelector('textarea[name="TaskDescription"]').value.trim();
+            const solution = document.querySelector('textarea[name="SolutionDescription"]').value.trim();
+
+            if (!name || !task || !solution) {
+                alert('Поля Название, Описание задачи и Описание решения не могут быть пустыми!');
+                return false;
+            }
+
+            return true; // форма валидна
+        }
+    </script>
+</body>
+</html>

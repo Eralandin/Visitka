@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Visitka.Models.PriceViewModel>
+@{
+    Layout = null;
+
+}
+
+<div class="d-flex justify-content-between mb-3">
+    <h4>Цены</h4>
+    <a href="/admin/prices/add" class="btn btn-success">Добавить</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Минимальная стоимость</th>
+            <th>Изображение</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.MinCost</td>
+                    <td>
+                        @if (item.HasImage)
+                        {
+                            <img src="@Url.Action("GetPriceImage", "Admin", new { id = item.Id })"
+                                 alt="Image" width="100" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">Нет</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/admin/prices/edit/@item.Id" class="btn btn-sm btn-primary me-1">Редактировать</a>
+                        <button class="btn btn-sm btn-danger" onclick="deletePrice(@item.Id)">Удалить</button>
+                        <script>
+                            async function deletePrice(id) {
+                                if (!confirm("Вы уверены, что хотите удалить эту запись?")) return;
+
+                                try {
+                                    const response = await fetch(`/admin/price/${id}?tab=prices`, {
+                                        method: "POST"
+                                    });
+
+                                    if (!response.ok) {
+                                        alert("Ошибка при удалении");
+                                        return;
+                                    }
+
+                                    // обновляем таблицу после удаления
+                                    location.reload();
+                                } catch (err) {
+                                    console.error(err);
+                                    alert("Ошибка соединения с сервером");
+                                }
+                            }
+                        </script>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Записей нет</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+
+}

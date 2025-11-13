@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Visitka.Models.Request>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Имя клиента</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Telegram</th>
+            <th>Название задачи</th>
+            <th>Комментарий</th>
+            <th>Дата</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var req in Model)
+        {
+            <tr>
+                <td>@req.ClientName</td>
+                <td>@req.Email</td>
+                <td>@req.PhoneNumber</td>
+                <td>@req.Telegram</td>
+                <td>@req.NameOfTask</td>
+                <td>@req.Comment</td>
+                <td>@req.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" onclick="deleteRequest(@req.Id)">Удалить</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function deleteRequest(id) {
+        if (!confirm("Вы уверены, что хотите удалить этот элемент?")) return;
+
+        const formData = new FormData();
+        formData.append("id", id);
+
+        fetch("/admin/requests/delete", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => {
+            if (res.ok) {
+                // Перезагружаем таблицу после удаления
+                fetch("/admin/requests", {
+                    method: "POST"
+                })
+                .then(r => r.text())
+                .then(html => {
+                    document.getElementById("tableContainer").innerHTML = html;
+                });
+            } else if (res.status === 404) {
+                alert("Элемент не найден");
+            } else {
+                alert("Ошибка удаления");
+            }
+        })
+        .catch(() => alert("Ошибка соединения с сервером"));
+    }
+</script>
+
+

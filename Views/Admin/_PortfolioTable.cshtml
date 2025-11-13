@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Visitka.Controllers.PortfolioViewMod>
+@{
+    Layout = null;
+
+}
+<div class="d-flex justify-content-between mb-3">
+    <h4>Портфолио</h4>
+    <a class="btn btn-success" href="/admin/portfolio/add?tab=portfolio">Добавить</a>
+</div>
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Описание задачи</th>
+            <th>Описание решения</th>
+            <th>Категории</th>
+            <th>Дата релиза</th>
+            <th>На главной</th>
+            <th>Новое</th>
+            <th>Превью</th>
+            <th>Основное</th>
+            <th>Мобильное</th>
+            <th>PPImage</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="portfolio-@item.Id">
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.TaskDescription</td>
+                <td>@item.SolutionDescription</td>
+                <td>
+                    @foreach (var catName in item.CategoryNames)
+                    {
+                        <span class="badge bg-secondary me-1">@catName</span>
+                    }
+                </td>
+                <td>@item.releasedate</td>
+                <td>@(item.onmainpage ? "Да" : "Нет")</td>
+                <td>@(item.isnew ? "Да" : "Нет")</td>
+                <td>
+                    @if (item.PreviewImage != null)
+                    {
+                        <img src="/admin/portfolio/image/@item.Id?type=preview" width="100" />
+
+                    }
+                </td>
+                <td>
+                    @if (item.MainImage != null)
+                    {
+                        <img src="/admin/portfolio/image/@item.Id?type=main" width="100" />
+
+                    }
+                </td>
+                <td>
+                    @if (item.MobileImage != null)
+                    {
+                        <img src="/admin/portfolio/image/@item.Id?type=mobile" width="100" />
+
+                    }
+                </td>
+                <td>
+                    @if (item.ppimage != null)
+                    {
+                        <img src="/admin/portfolio/image/@item.Id?type=pp" width="100" />
+
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary me-1" href="/admin/portfolio/edit/@item.Id?tab=portfolio">Редактировать</a>
+                    <button class="btn btn-sm btn-danger" onclick="deletePortfolio(@item.Id)">Удалить</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function editPortfolio(id) {
+        alert("Редактирование портфолио id=" + id);
+    }
+
+    function deletePortfolio(id) {
+        if (!confirm("Вы уверены, что хотите удалить этот элемент?")) return;
+
+        fetch(`/admin/portfolio/delete/${id}`, { method: "POST" })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById(`portfolio-${id}`).remove();
+                } else {
+                    alert("Ошибка удаления");
+                }
+            });
+    }
+</script>
