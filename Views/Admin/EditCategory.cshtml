@@ -1,0 +1,43 @@
+﻿@model Visitka.Models.Category
+@{
+    var title = Model.Id > 0 ? "Редактирование категории" : "Создание категории";
+    ViewData["Title"] = title;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+    <div class="container py-4">
+        <h2 class="mb-4">@ViewData["Title"]</h2>
+        @{
+            var formAction = Model.Id > 0 ? $"/admin/category/edit/{Model.Id}?tab=categories" : "/admin/category/add?tab=categories";
+        }
+        <form method="post" enctype="multipart/form-data" action="@formAction">
+            @Html.AntiForgeryToken()
+
+            <!-- Название -->
+            <div class="mb-3">
+                <label class="form-label">Название</label>
+                <input type="text" name="Name" class="form-control" value="@Model.Name" required />
+            </div>
+
+            <div class="d-flex">
+                <button type="submit" class="btn btn-success me-2">Сохранить</button>
+                <a href="/admin/panel?tab=categories" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

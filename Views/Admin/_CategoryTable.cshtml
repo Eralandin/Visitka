@@ -1,0 +1,65 @@
+﻿@model List<Visitka.Models.Category>
+
+<div class="d-flex justify-content-between mb-2">
+    <h5>Категории</h5>
+    <a href="/admin/category/add" class="btn btn-success btn-sm">Добавить категорию</a>
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th style="width: 60px;">ID</th>
+            <th>Название категории</th>
+            <th style="width: 180px;">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td colspan="3" class="text-center text-muted py-3">Категории отсутствуют</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@cat.Id</td>
+                    <td>@cat.Name</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/admin/category/edit/@cat.Id" class="btn btn-sm btn-primary">
+                                Редактировать
+                            </a>
+                            <button class="btn btn-sm btn-danger" onclick="deleteCategory(@cat.Id)">
+                                Удалить
+                            </button>
+                            <script>
+                                async function deleteCategory(id) {
+                                    if (!confirm("Вы уверены, что хотите удалить эту запись?")) return;
+
+                                    try {
+                                        const response = await fetch(`/admin/category/delete/${id}?tab=categories`, {
+                                            method: "POST"
+                                        });
+
+
+
+                                        // обновляем таблицу после удаления
+                                        location.reload();
+                                    } catch (err) {
+                                        console.error(err);
+                                        alert("Ошибка соединения с сервером");
+                                    }
+                                }
+                            </script>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+

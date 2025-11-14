@@ -32,6 +32,7 @@
             <button id="btnPortfolio" class="btn btn-primary me-2">Портфолио</button>
             <button id="btnPrices" class="btn btn-secondary me-2">Цены</button>
             <button id="btnRequests" class="btn btn-info me-2">Заявки</button>
+            <button id="btnCategories" class="btn btn-info me-2">Категории</button>
             <form method="post" action="/admin/logout" class="ms-auto">
                 <button type="submit" class="btn btn-danger">Выход</button>
             </form>
@@ -69,7 +70,10 @@
                 loadTable("/admin/prices");
             } else if (tab === "requests") {
                 loadTable("/admin/requests");
-            }else{
+            }else if (tab === "categories"){
+                loadTable("/admin/categories");
+            }
+            else{
                 loadTable("/admin/portfolio");
             }
 
@@ -77,6 +81,7 @@
             $("#btnPortfolio").click(function () { loadTable("/admin/portfolio"); });
             $("#btnPrices").click(function () { loadTable("/admin/prices"); });
             $("#btnRequests").click(function () { loadTable("/admin/requests"); });
+            $("#btnCategories").click(function () { loadTable("/admin/categories"); });
         });
 
     </script>

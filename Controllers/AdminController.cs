@@ -570,6 +570,135 @@ namespace Visitka.Controllers
         }
 
 
+        [HttpPost("/admin/categories")]
+        public async Task<IActionResult> GetCategoriesTable()
+        {
+            var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+            if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                return Redirect("/admin");
+
+            var categories = await _db.Categories
+                .Select(p => new Category
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+                .ToListAsync();
+
+            return PartialView("_CategoryTable", categories);
+        }
+
+
+        [HttpGet("category/add")]
+        public IActionResult AddCategory()
+        {
+
+            var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+            if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                return Redirect("/admin");
+
+            return View("EditCategory", new Category());
+        }
+
+        [HttpPost("category/add")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCategoryPost(IFormCollection form)
+        {
+            var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+            if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                return Redirect("/admin");
+
+            var category = new Category
+            {
+                Name = form["Name"]
+            };
+
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
+
+            return Redirect("/admin/panel?tab=categories");
+        }
+
+        [HttpGet("category/edit/{id}")]
+        public async Task<IActionResult> EditCategory(int id)
+        {
+            var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+            if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                return Redirect("/admin");
+
+            var category = await _db.Categories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+
+            return View("EditCategory", category);
+        }
+
+        [HttpPost("category/edit/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategoryPost(int id, IFormCollection form)
+        {
+            var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+            if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                return Redirect("/admin");
+
+            var category = await _db.Categories.FindAsync(id);
+            if (category == null) return NotFound();
+
+            category.Name = form["Name"];
+
+            await _db.SaveChangesAsync();
+            return Redirect("/admin/panel?tab=categories");
+        }
+
+        [HttpPost("category/delete/{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            try
+            {
+                var isLoggedIn = HttpContext.Session.GetString("IsAdminLoggedIn");
+                if (string.IsNullOrEmpty(isLoggedIn) || isLoggedIn != "true")
+                    return Unauthorized();
+
+                // Находим категорию
+                var category = await _db.Categories.FindAsync(id);
+                if (category == null)
+                    return NotFound();
+
+                // Удаляем все связи в PortfolioCategories
+                var relatedPortfolioCategories = await _db.PortfolioCategories
+                    .Where(pc => pc.CategoryId == id)
+                    .ToListAsync();
+
+                if (relatedPortfolioCategories.Any())
+                    _db.PortfolioCategories.RemoveRange(relatedPortfolioCategories);
+
+                await _db.SaveChangesAsync();
+                // Удаляем саму категорию
+                _db.Categories.Remove(category);
+
+                await _db.SaveChangesAsync();
+
+                var categories = await _db.Categories
+                .Select(p => new Category
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+                .ToListAsync();
+
+                return PartialView("_CategoryTable",categories);
+            }
+            catch (Exception ex)
+            {
+                // Логируем исключение (если есть логгер)
+                Console.WriteLine(ex);
+                return StatusCode(500, "Ошибка при удалении категории");
+            }
+        }
+
+
+
+
 
     }
 
