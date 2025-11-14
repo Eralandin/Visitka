@@ -105,9 +105,9 @@
         <div class="last-question">
             <p class="last-p"><span class="asterisk">*</span>Остались вопросы - задайте их <span class="last-span">нам</span>.</p>
         </div>
-        <form class="custom-question-form">
+        <form class="custom-question-form" method="post" asp-controller="Home" asp-action="RedirectToContact">
             <div class="form-container row justify-content-between">
-                <input type="text" class="text-input col-8" placeholder="Задайте свой вопрос...">
+                <input type="text" name="question" class="text-input col-8" placeholder="Задайте свой вопрос..." required>
                 <button type="submit" class="submit-btn col-4">Отправить</button>
             </div>
         </form>

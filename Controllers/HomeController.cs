@@ -32,5 +32,15 @@ namespace Visitka.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public IActionResult RedirectToContact(string question)
+        {
+            if (!string.IsNullOrEmpty(question))
+            {
+                TempData["InitialQuestion"] = question;
+            }
+            return RedirectToAction("Index", "Request");
+        }
     }
 }

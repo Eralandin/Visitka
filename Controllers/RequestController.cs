@@ -19,6 +19,14 @@ namespace Visitka.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (TempData["InitialQuestion"] != null)
+            {
+                ViewData["InitialQuestion"] = TempData["InitialQuestion"].ToString();
+            }
+            else
+            {
+                ViewData["InitialQuestion"] = "";
+            }
             return View();
         }
 

@@ -89,6 +89,18 @@ namespace Visitka.Controllers
         }
 
 
+        // GET: /portfolio/image/ppreview/1
+        [HttpGet("portfolio/image/ppreview/{id}")]
+        public async Task<IActionResult> GetPPImage(int id)
+        {
+            var portfolio = await _context.Portfolios
+                .Where(p => p.Id == id)
+                .Select(p => new { p.ppimage, p.Name })
+                .FirstOrDefaultAsync();
+
+            return GetImageResult(portfolio?.ppimage, portfolio?.Name, "ppreview");
+        }
+
 
         // GET: /portfolio/image/preview/1
         [HttpGet("portfolio/image/preview/{id}")]
