@@ -23,7 +23,14 @@
                         <input type="text" class="form-name" id="name" placeholder="Ваше имя" required>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <input type="tel" class="form-phone" id="phone" placeholder="Телефон" required>
+                        <input type="tel" class="form-phone" id="phone" name="phone" 
+                            placeholder="Телефон" 
+                            pattern="[\+]?[7-8]?[0-9\s\-\(\)]{10,15}"
+                            title="Введите корректный номер телефона (например: +7 999 123-45-67 или 89991234567)"
+                            required>
+                        <div class="invalid-feedback">
+                            Пожалуйста, введите корректный номер телефона
+                        </div>
                     </div>
                 </div>
                 <div class="row">
