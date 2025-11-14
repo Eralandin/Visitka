@@ -12,9 +12,13 @@ body{
 .backbtn {
   text-decoration: none;
   font-family: "Manrope", sans-serif;
-  font-size: 24px;
+  font-size: calc(18px + 6 * (100vw / 1920));
   font-weight: 300;
   color: #ffffff;
+}
+
+.arrow-img {
+  height: calc(18px + 6 * (100vw / 1920));
 }
 
 .backbtn:hover {

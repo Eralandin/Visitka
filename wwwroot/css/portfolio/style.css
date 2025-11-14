@@ -4,12 +4,12 @@ body {
 }
 
 .slogan-section-portfolio {
-    margin-top: 100px;
-    margin-bottom: 118px;
+    margin-top: calc(10px + 90 * (100vw / 1920));
+    margin-bottom: calc(20px + 100 * (100vw / 1920));
 }
 
 .slogan-portfolio {
-    font-size: 60px;
+    font-size: calc(12px + 50 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
     white-space: nowrap;
 }
@@ -23,6 +23,7 @@ body {
     border-radius: 55px;
     border: 2px solid #ffffff;
     padding: 0px 32px 10px 32px;
+    padding: 0px calc(10px + 22 * ((100vw - 320px) / (1920 - 320))) calc(0px + 10 * ((100vw - 320px) / (1920 - 320))) calc(10px + 22 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 600;
     align-content: center;
 }
@@ -75,7 +76,7 @@ body {
 }
 
 .project-title {
-    font-size: 64px;
+    font-size: calc(18px + 46 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 600;
     color: #ffffff;
     margin: 1rem 0px;
@@ -88,7 +89,7 @@ body {
 
 .direction-item {
     margin-right: 1rem;
-    font-size: 24px;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
     border: 1px solid rgba(158, 158, 158, 1);
     padding: 8px 22px 12px 22px;
@@ -100,7 +101,7 @@ body {
     z-index: 1;
     top: 1rem;
     left: 1rem;
-    font-size: 24px;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 500;
     color: #000000;
     border: 1px solid #ffffff;
@@ -113,4 +114,16 @@ body {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    width: calc(22px + 14 * (100vw / 1920));
+}
+
+@media (max-width: 567px) {
+
+    .portfolio-images-container .row {
+        flex-direction: column;
+    }
+    
+    .portfolio-card {
+        height: 100% !important;
+    }
 }
