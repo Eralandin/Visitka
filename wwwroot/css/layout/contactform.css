@@ -221,6 +221,10 @@ input::placeholder {
         line-height: 3rem;
     }
 
+    .selectCustom-option {
+        padding: 0.5rem 16px;;
+    }
+
     .select {
         margin-bottom: 0.5rem !important;
     }

@@ -50,7 +50,6 @@ namespace Visitka.Controllers
         {
             if (imageData == null || imageData.Length == 0)
             {
-                // Можно вернуть placeholder изображение
                 return NotFound($"Image {imageType} not found for price {name}");
             }
 
