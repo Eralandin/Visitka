@@ -430,8 +430,14 @@
     .last-question {
         margin-bottom: 20px;
     }
+}
 
-    /* .form-container {
-        height: 40px;
-    } */
+@media (min-height: 1081px) {
+    .portfolio-section, .portfolio-container {
+        height: 1188px;
+    }
+
+    .last-section {
+        height: 1188px;
+    }
 }

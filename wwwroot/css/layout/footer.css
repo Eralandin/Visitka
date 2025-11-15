@@ -5,6 +5,7 @@
 
 footer{
     height: 100vh;
+    max-height: 1080px;
     background-color: #FF6905;
     color: #000000 !important;
     position: relative;
@@ -65,5 +66,4 @@ footer{
             width: calc(160px + 110 * ((100vw - 320px) / (1920 - 320)));
         }
     }
-
 }

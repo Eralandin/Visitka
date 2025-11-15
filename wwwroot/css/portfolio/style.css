@@ -127,3 +127,9 @@ body {
         height: 100% !important;
     }
 }
+
+@media (min-height: 1080px) {
+    .portfolio-images-container {
+        height: 2700px;
+    }
+}
