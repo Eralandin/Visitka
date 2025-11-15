@@ -1,0 +1,77 @@
+footer {
+    display: none;
+}
+
+main {
+    padding-bottom: 0 !important;
+}
+
+header .navbar {
+    background-color: transparent !important;
+}
+
+body::after {
+  content: "";
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(/error.png);
+  background-blend-mode: luminosity; 
+  background-position-x: center;
+  background-size: cover;
+  opacity: 0.51;
+  filter: blur(6px) grayscale(100%);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -2;   
+}
+
+.main-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: transparent;
+    z-index: 0;
+}
+
+.error-code {
+    font-size: calc(125px + 125 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0;
+    line-height: 100%;
+}
+
+.error-text {
+    font-size: calc(18px + 22 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.return-text {
+    text-decoration: none;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    color: rgba(183, 183, 183, 1);
+    transition: all 0.3s ease;
+}
+    .return-text:hover {
+        color: #ffffff;
+    }
+
+.gradient-texture {
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 1;
+    background: url(/gradient.png) no-repeat center top / cover;
+    z-index: -1;
+}
