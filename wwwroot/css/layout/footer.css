@@ -9,61 +9,61 @@ footer{
     background-color: #FF6905;
     color: #000000 !important;
     position: relative;
+}
 
-    .nav-link {
-        text-decoration: underline;
-        text-decoration-color: #FF6905;
-        text-decoration-thickness: 0px;
-        text-underline-offset: 5px;
-        transition: all 0.3s ease;
+footer .nav-link {
+    text-decoration: underline;
+    text-decoration-color: #FF6905;
+    text-decoration-thickness: 0px;
+    text-underline-offset: 5px;
+    transition: all 0.3s ease;
+}
+
+footer .nav-link:hover {
+    text-decoration-color: black;
+    text-decoration-thickness: 0px;
+}
+
+footer .navbar-nav .nav-item {
+    font-family: "Manrope", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+footer .nav-send {
+    border-radius: 30px;
+    border: 0.5px solid #ffffff;
+}
+
+footer .brand-text {
+    font-family: "Medium", sans-serif;
+    font-size: 9vw;
+    font-weight: 400;
+}
+
+footer .year-text {
+    font-family: "Manrope", sans-serif;
+    font-size: calc(14px + 6 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+}
+
+footer .footer-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    user-select: none;
+}
+
+@media (max-width: 575.98px) {
+    footer .navbar-nav {
+        flex-wrap: wrap;
+        flex-direction: column !important;
+        align-items: center;
+        position: relative;
     }
 
-    .nav-link:hover {
-        text-decoration-color: black;
-        text-decoration-thickness: 0px;
-    }
-
-    .navbar-nav .nav-item {
-        font-family: "Manrope", sans-serif;
-        font-size: 20px;
-        font-weight: 400;
-    }
-
-    .nav-send {
-        border-radius: 30px;
-        border: 0.5px solid #ffffff;
-    }
-
-    .brand-text {
-        font-family: "Medium", sans-serif;
-        font-size: 9vw;
-        font-weight: 400;
-    }
-
-    .year-text {
-        font-family: "Manrope", sans-serif;
-        font-size: calc(14px + 6 * ((100vw - 320px) / (1920 - 320)));
-        font-weight: 400;
-    }
-
-    .footer-bottom {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        user-select: none;
-    }
-
-    @media (max-width: 575.98px) {
-        .navbar-nav {
-            flex-wrap: wrap;
-            flex-direction: column !important;
-            align-items: center;
-            position: relative;
-        }
-
-        .nav-item {
-            width: calc(160px + 110 * ((100vw - 320px) / (1920 - 320)));
-        }
+    footer .nav-item {
+        width: calc(160px + 110 * ((100vw - 320px) / (1920 - 320)));
     }
 }

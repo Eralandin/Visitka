@@ -1,0 +1,36 @@
+.success-section .container {
+    height: 60vh;
+    user-select: none;
+    margin-bottom: 50px;
+}
+
+.success-text {
+    font-size: calc(20px + 16 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 600;
+    color: rgba(170, 250, 85, 1);
+    margin-bottom: 36px;
+    margin-top: 93px;
+}
+
+.feedback-text {
+    font-size: calc(20px + 16 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    margin-bottom: 150px;
+}
+
+.return-text {
+    text-decoration: none;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    color: rgba(183, 183, 183, 1);
+    transition: all 0.3s ease;
+}
+    .return-text:hover {
+        color: #ffffff;
+    }
+
+@media (min-height: 1080px) {
+    .success-section .container{
+        height: 555px;
+    }
+}

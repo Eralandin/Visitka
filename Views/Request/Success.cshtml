@@ -1,1 +1,14 @@
-<partial name="_Backbtn" />
+@{
+    ViewData["Title"] = "Успех";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/request/success.css" asp-append-version="true">
+}
+<section class="success-section">
+    <div class="container d-flex flex-column justify-content-center text-center align-items-center">
+        <p class="success-text">Заявка успешно отправлена!</p>
+        <p class="feedback-text">Свяжемся с вами в ближайшее время</p>
+        <a class="return-text" asp-area="" asp-controller="Home" asp-action="Index">Вернуться на главную</a>
+    </div>
+</section>

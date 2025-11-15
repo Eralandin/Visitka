@@ -33,7 +33,6 @@ namespace Visitka.Controllers
                 })
                 .ToListAsync();
 
-            // Передаем выбранный serviceId в ViewData
             if (serviceId.HasValue)
             {
                 var selectedService = prices.FirstOrDefault(p => p.Id == serviceId.Value);
@@ -44,7 +43,6 @@ namespace Visitka.Controllers
                 }
             }
 
-            // Сохраняем InitialQuestion из TempData если есть
             if (TempData["InitialQuestion"] != null)
             {
                 ViewData["InitialQuestion"] = TempData["InitialQuestion"].ToString();
@@ -62,12 +60,38 @@ namespace Visitka.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(Request request)
         {
+            // Отладочная информация
+            if (!ModelState.IsValid)
+            {
+                // Логируем ошибки валидации
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Validation error: {error.ErrorMessage}");
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Requests.Add(request);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Success");
+                try
+                {
+                    _context.Requests.Add(request);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Success");
+                }
+                catch (Exception ex)
+                {
+                    // Логируем ошибку базы данных
+                    System.Diagnostics.Debug.WriteLine($"Database error: {ex.Message}");
+                    ModelState.AddModelError("", "Произошла ошибка при сохранении данных");
+                }
             }
+            // if (ModelState.IsValid)
+            // {
+            //     _context.Requests.Add(request);
+            //     await _context.SaveChangesAsync();
+            //     return RedirectToAction("Success");
+            // }
 
             // Если ошибки валидации - возвращаем обратно с данными
             var prices = await _context.Prices

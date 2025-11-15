@@ -17,13 +17,14 @@
             </p>
         </div>
         <div class="form-container col-7">
-            <form>
+            <form method="post" asp-controller="Request" asp-action="Index">
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <input type="text" class="form-name" id="name" placeholder="Ваше имя" required>
+                        <input type="text" class="form-name" id="name" name='ClientName' placeholder="Ваше имя" required>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <input type="tel" class="form-phone" id="phone" name="phone" 
+                        <input type="tel" class="form-phone" id="phone" name="PhoneNumber"
                             placeholder="Телефон" 
                             pattern="[\+]?[7-8]?[0-9\s\-\(\)]{10,15}"
                             title="Введите корректный номер телефона (например: +7 999 123-45-67 или 89991234567)"
@@ -35,10 +36,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <input type="email" class="form-email" id="email" placeholder="E-mail" required>
+                        <input type="email" class="form-email" id="email" name="Email" placeholder="E-mail" required>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <input type="text" class="form-telegram" id="telegram" placeholder="Telegram" required>
+                        <input type="text" class="form-telegram" id="telegram" name="Telegram" placeholder="Telegram">
                     </div>
                 </div>
                 <div class="row">
@@ -60,25 +61,25 @@
                                     {
                                         foreach (var price in Model)
                                         {
-                                            <div class="selectCustom-option" data-value="@price.Id">
+                                            <div class="selectCustom-option" data-value="@price.Name">
                                                 @price.Name
                                             </div>
                                         }
                                     }
                                 </div>
-                                <input type="hidden" id="selectedService" name="selectedServiceId" value="@ViewData["SelectedServiceId"]">
+                                <input type="hidden" id="selectedService" class="selectedTrigger" name="NameOfTask" value="@ViewData["SelectedServiceName"]">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-4">
-                        <input type="text" class="contactform-text" id="text" placeholder="Опишите ваш бизнес в двух словах" value="@ViewData["InitialQuestion"]" required>
+                        <input type="text" class="contactform-text" id="text" name="Comment" placeholder="Опишите ваш бизнес в двух словах" value="@ViewData["InitialQuestion"]" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-4 checkbox-btn">
-                        <input type="checkbox" class="contactform-checkbox" id="checkbox" required>
+                        <input type="checkbox" class="contactform-checkbox" id="checkbox" name="AgreeToPrivacy" required>
                         <label class="form-checkbox-label" for="checkbox">
                             Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
                         </label>
@@ -93,91 +94,4 @@
 </div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const elSelectCustom = document.getElementsByClassName("js-selectCustom")[0];
-        const elSelectCustomValue = elSelectCustom.children[0];
-        const elSelectCustomOptions = elSelectCustom.children[1];
-        const defaultLabel = elSelectCustomValue.getAttribute("data-value");
-        const selectedServiceInput = document.getElementById("selectedService");
-        
-        // Функция для выбора опции
-        function selectOption(elOption) {
-            const value = elOption.getAttribute("data-value");
-            const text = elOption.textContent;
-            
-            // Обновляем текст триггера
-            elSelectCustomValue.textContent = text;
-            elSelectCustomValue.setAttribute("data-value", value);
-            
-            // Обновляем скрытое поле формы
-            if (selectedServiceInput) {
-                selectedServiceInput.value = value;
-            }
-            
-            // Добавляем стили для выбранного значения
-            elSelectCustomValue.classList.add('has-value');
-            elSelectCustomValue.style.color = "#ffffff";
-            
-            // Снимаем выделение со всех опций и добавляем текущей
-            Array.from(elSelectCustomOptions.children).forEach(option => {
-                option.classList.remove("isActive");
-            });
-            elOption.classList.add("isActive");
-            
-            // Закрываем dropdown
-            elSelectCustom.classList.remove("isActive");
-        }
-
-        // Автоматически выбираем опцию если передан serviceId
-        const selectedServiceId = '@ViewData["SelectedServiceId"]';
-        if (selectedServiceId) {
-            const targetOption = Array.from(elSelectCustomOptions.children).find(option => 
-                option.getAttribute("data-value") === selectedServiceId
-            );
-            
-            if (targetOption) {
-                selectOption(targetOption);
-            }
-        }
-
-        // Обработчики кликов по опциям
-        Array.from(elSelectCustomOptions.children).forEach(function (elOption) {
-            elOption.addEventListener("click", (e) => {
-                e.stopPropagation();
-                selectOption(elOption);
-            });
-        });
-
-        // Открытие/закрытие dropdown
-        elSelectCustomValue.addEventListener("click", (e) => {
-            e.stopPropagation();
-            elSelectCustom.classList.toggle("isActive");
-        });
-
-        // Закрытие при клике вне элемента
-        document.addEventListener("click", (e) => {
-            const didClickedOutside = !elSelectCustom.contains(e.target);
-            if (didClickedOutside) {
-                elSelectCustom.classList.remove("isActive");
-            }
-        });
-
-        // Закрытие по ESC
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && elSelectCustom.classList.contains("isActive")) {
-                elSelectCustom.classList.remove("isActive");
-            }
-        });
-
-        // Добавляем обработчик для обновления скрытого поля при изменении выбора
-        elSelectCustomValue.addEventListener('DOMSubtreeModified', function() {
-            if (selectedServiceInput) {
-                const currentValue = elSelectCustomValue.getAttribute("data-value");
-                if (currentValue && currentValue !== defaultLabel) {
-                    selectedServiceInput.value = currentValue;
-                }
-            }
-        });
-    });
-</script>
+<script src="~/js/contactform.js" />
