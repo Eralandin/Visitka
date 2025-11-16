@@ -1,97 +1,103 @@
 @model IEnumerable<Visitka.Models.Price>
 
+
 <link rel="stylesheet" href="~/css/layout/contactform.css" asp-append-version="true" />
 
-<div class="container contactform-container">
-    <div class="row first-row">
-        <div class="form-text-container col-5">
-            <p class="ft1">
-                <span class="asterisk">*</span>Оставьте свои контакты<br />
-                и информацию для<br />
-                обратной связи.
-            </p>
-            <p class="ft2">
-                В ближайшее время с вами<br />
-                свяжутся для уточнения<br />
-                деталей задачи
-            </p>
-        </div>
-        <div class="form-container col-7">
-            <form method="post" asp-controller="Request" asp-action="Index">
-                @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <input type="text" class="form-name" id="name" name='ClientName' placeholder="Ваше имя" required>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <input type="tel" class="form-phone" id="phone" name="PhoneNumber"
-                            placeholder="Телефон" 
-                            pattern="[\+]?[7-8]?[0-9\s\-\(\)]{10,15}"
-                            title="Введите корректный номер телефона (например: +7 999 123-45-67 или 89991234567)"
-                            required>
-                        <div class="invalid-feedback">
-                            Пожалуйста, введите корректный номер телефона
+
+<section>
+    <div class="container contactform-container">
+        <div class="row first-row">
+            <div class="form-text-container col-5">
+                <p class="ft1">
+                    <span class="asterisk">*</span>Оставьте свои контакты<br />
+                    и информацию для<br />
+                    обратной связи.
+                </p>
+                <p class="ft2">
+                    В ближайшее время с вами<br />
+                    свяжутся для уточнения<br />
+                    деталей задачи
+                </p>
+            </div>
+            <div class="form-container col-7">
+                <form method="post" asp-controller="Request" asp-action="Index">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-name" id="name" name='ClientName' placeholder="Ваше имя" required>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <input type="email" class="form-email" id="email" name="Email" placeholder="E-mail" required>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <input type="text" class="form-telegram" id="telegram" name="Telegram" placeholder="Telegram">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="select mb-4">
-                        <div class="selectWrapper">
-                            <div class="selectCustom js-selectCustom">
-                                <div class="selectCustom-trigger" id="selectTrigger" data-selected-value="@ViewData["SelectedServiceId"]">
-                                    @if (ViewData["SelectedServiceName"] != null)
-                                    {
-                                        @ViewData["SelectedServiceName"]
-                                    }
-                                    else
-                                    {
-                                        @:Выберите спектр услуг
-                                    }
-                                </div>
-                                <div class="selectCustom-options">
-                                    @if (Model != null)
-                                    {
-                                        foreach (var price in Model)
-                                        {
-                                            <div class="selectCustom-option" data-value="@price.Name">
-                                                @price.Name
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                                <input type="hidden" id="selectedService" class="selectedTrigger" name="NameOfTask" value="@ViewData["SelectedServiceName"]">
+                        <div class="col-md-6 mb-4">
+                            <input type="tel" class="form-phone" id="phone" name="PhoneNumber"
+                                placeholder="Телефон" 
+                                pattern="[\+]?[7-8]?[0-9\s\-\(\)]{10,15}"
+                                title="Введите корректный номер телефона (например: +7 999 123-45-67 или 89991234567)"
+                                required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите корректный номер телефона
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="mb-4">
-                        <input type="text" class="contactform-text" id="text" name="Comment" placeholder="Опишите ваш бизнес в двух словах" value="@ViewData["InitialQuestion"]" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="email" class="form-email" id="email" name="Email" placeholder="E-mail" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-telegram" id="telegram" name="Telegram" placeholder="Telegram">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="mb-4 checkbox-btn">
-                        <input type="checkbox" class="contactform-checkbox" id="checkbox" name="AgreeToPrivacy" required>
-                        <label class="form-checkbox-label" for="checkbox">
-                            Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
-                        </label>
+                    <div class="row">
+                        <div class="select mb-4">
+                            <div class="selectWrapper">
+                                <div class="selectCustom js-selectCustom">
+                                    <div class="selectCustom-trigger" id="selectTrigger" data-selected-value="@ViewData["SelectedServiceId"]">
+                                        @if (ViewData["SelectedServiceName"] != null)
+                                        {
+                                            @ViewData["SelectedServiceName"]
+                                        }
+                                        else
+                                        {
+                                            @:Выберите спектр услуг
+                                        }
+                                    </div>
+                                    <div class="selectCustom-options">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var price in Model)
+                                            {
+                                                <div class="selectCustom-option" data-value="@price.Name">
+                                                    @price.Name
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                    <input type="hidden" id="selectedService" class="selectedTrigger" name="NameOfTask" value="@ViewData["SelectedServiceName"]">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <button type="submit" class="submit-btn full-width-btn">Отправить</button>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="mb-4">
+                            <input type="text" class="contactform-text" id="text" name="Comment" placeholder="Опишите ваш бизнес в двух словах" value="@ViewData["InitialQuestion"]" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-4 checkbox-btn">
+                            <input type="checkbox" class="contactform-checkbox" id="checkbox" name="AgreeToPrivacy" required>
+                            <label class="form-checkbox-label" for="checkbox">
+                                Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="submit-btn full-width-btn">Отправить</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 
-<script src="~/js/contactform.js" />
+@section Scripts {
+    <script src="~/js/contactform.js"></script>
+}

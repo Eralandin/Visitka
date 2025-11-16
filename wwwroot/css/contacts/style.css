@@ -6,21 +6,18 @@ body {
 .slogan-contacts-1 {
     width: 100%;
     text-align: left;
-    font-style: medium;
     font-size: 40px;
-    font-weight: 300;
+    font-weight: 500;
 }
+    .slogan-contacts-1 .asterisk {
+        font-weight: 700;
+    }
 
 .contact-subtitle {
-    margin-top: 85px;
-    font-family: "Manrope", sans-serif;
+    margin-top: calc(30px + 30 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 300;
     font-style: normal;
-    font-size: 20px;
-    line-height: normal;
-    letter-spacing: 0%;
-    text-align: left;
-    vertical-align: middle;
+    font-size: 24px;
     width: 100%;
     color: rgba(255, 255, 255, 1);
 }
@@ -29,65 +26,70 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 98px;
     width: 100%;
+    margin-top: calc(40px + 40 * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(40px + 100 * ((100vw - 320px) / (1920 - 320)));
+    margin-left: 0;
+    margin-right: 0;
+    font-size: calc(10px + 38 * (100vw / 1920));
 }
 
 .contact-phone {
     font-family: "Manrope", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 44px;
-    line-height: normal;
-    letter-spacing: 0%;
-    vertical-align: middle;
+    font-weight: 700;
+    padding-left: 0;
 }
+    .contact-phone a {
+        text-decoration: none;
+        color: #ffffff;
+        margin-bottom: 0;
+        transition: all 0.3s ease;
+    }
+        .contact-phone a:hover {
+            color: #ffffff;
+            text-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
+        }
 
 .messenger-links {
     display: flex;
     align-items: center;
-    gap: 152px;
-    margin-left: 152px;
     position: relative;
-    top: -10px;
 }
 
 .messenger-link {
     font-family: "Manrope", sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     font-style: normal;
-    font-size: 44px;
-    line-height: normal;
-    letter-spacing: 0%;
     text-decoration: none;
     cursor: pointer;
 }
 
 .telegram {
     color: #1495FF;
-    font-size: 48px;
-    font-weight: 700;
+    text-align: center;
 }
     .telegram:hover {
         color: #1495FF;
+        text-shadow: 0px 0px 15px #1495FF;
     }
 
 .whatsapp {
     color: #56BC12;
-    font-size: 48px;
-    font-weight: 700;
+    text-align: center;
 }
     .whatsapp:hover {
         color: #56BC12;
+        text-shadow: 0px 0px 15px #56BC12;
     }
 
 .vk {
     color: #24ABFF;
-    font-size: 48px;
-    font-weight: 700;
+    text-align: end;
+    padding-right: 0;
 }
     .vk:hover {
         color: #24ABFF;
+        text-shadow: 0px 0px 15px #56BC12;
     }
 
 .messenger-link:hover {
@@ -95,13 +97,14 @@ body {
 }
 
 .specialists-text {
-    margin-top: 140px;
     width: 100%;
-    text-align: left;
-    font-style: medium;
     font-size: 40px;
-    font-weight: 400;
+    font-weight: 500;
+    display: none;
 }
+    .specialists-text .asterisk {
+        font-weight: 700;
+    }
 
 .specialists-gallery {
     margin-top: 90px;
@@ -176,3 +179,30 @@ body {
 .specialists-gallery .image-item:last-child {
     margin-right: 100px;
 } */
+
+@media (max-width: 768px) {
+    .contact-subtitle {
+        text-align: center;
+    }
+
+    .contact-content {
+        flex-direction: column;
+        margin: 3rem 0;
+        text-align: center;
+        font-size: calc(36px + 12 * ((100vw - 320px) / (1920 - 320)));
+    }
+        .contact-phone {
+            width: 100%;
+            padding: 0.25rem 0;
+        }
+
+    .messenger-links {
+        flex-direction: column;
+        width: 100%;
+    }
+    .messenger-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.25rem 0;
+    }
+}
