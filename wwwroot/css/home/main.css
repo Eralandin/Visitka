@@ -90,6 +90,7 @@
 .portfolio-section, .portfolio-container {
     height: 110vh;
     user-select: none;
+    min-height: 820px;
 }
 
 .first-card {
@@ -278,6 +279,7 @@
 
 .last-section {
     height: 110vh;
+    min-height:520px;
 }
 
 .last-p {

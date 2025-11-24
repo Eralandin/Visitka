@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Visitka.Data;
-using Visitka.Filters;
 using Visitka.Models;
 using Visitka.Services;
 
@@ -13,7 +12,6 @@ namespace Visitka.Controllers
 
     [ApiController]
     [Route("admin")]
-    [ServiceFilter(typeof(AdminAuthFilter))]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
@@ -34,14 +32,12 @@ namespace Visitka.Controllers
         }
 
         [HttpGet("")]
-        [AllowAnonymous]
         public IActionResult Login()
         {
             return View("Login");
         }
 
         [HttpGet("checkadmin")]
-        [AllowAnonymous]
         public async Task<ActionResult> CheckAdminExists()
         {
             var adminExists = await _authService.AdminExistsAsync();
@@ -49,7 +45,6 @@ namespace Visitka.Controllers
         }
 
         [HttpPost("login")]
-        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             // _authService.LoginAsync возвращает bool

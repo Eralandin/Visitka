@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Visitka.Data;
-using Visitka.Filters;
 using Visitka.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +16,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<AdminAuthFilter>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -49,6 +47,10 @@ if (app.Environment.IsDevelopment())
 app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 
 app.UseCors("AllowAll");
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
@@ -58,4 +60,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}");
 
-app.Run();
+app.Run($"http://0.0.0.0:5001"); //œŒÃ≈Õﬂ“‹ Õ¿ HTTPS
