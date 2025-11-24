@@ -24,33 +24,60 @@
                     @Html.AntiForgeryToken()
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <input type="text" class="form-name" id="name" name='ClientName' placeholder="Ваше имя" required>
+                            <input type="text" class="form-name" id="name" name='ClientName' placeholder="Ваше имя" 
+                                value="@(ViewData.ModelState["ClientName"]?.AttemptedValue ?? "")">
+                            <div class="invalid-feedback" id="nameError" style="display: none;">
+                                Пожалуйста, введите ваше имя
+                            </div>
+                            @if (ViewData.ModelState["ClientName"]?.Errors.Any() == true)
+                            {
+                                <div class="invalid-feedback d-block">
+                                    @ViewData.ModelState["ClientName"].Errors.First().ErrorMessage
+                                </div>
+                            }
                         </div>
                         <div class="col-md-6 mb-4">
                             <input type="tel" class="form-phone" id="phone" name="PhoneNumber"
                                 placeholder="Телефон" 
                                 pattern="[\+]?[7-8]?[0-9\s\-\(\)]{10,15}"
                                 title="Введите корректный номер телефона (например: +7 999 123-45-67 или 89991234567)"
-                                required>
-                            <div class="invalid-feedback">
+                                value="@(ViewData.ModelState["PhoneNumber"]?.AttemptedValue ?? "")">
+                            <div class="invalid-feedback" id="phoneError" style="display: none;">
                                 Пожалуйста, введите корректный номер телефона
                             </div>
+                            @if (ViewData.ModelState["PhoneNumber"]?.Errors.Any() == true)
+                            {
+                                <div class="invalid-feedback d-block">
+                                    @ViewData.ModelState["PhoneNumber"].Errors.First().ErrorMessage
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <input type="email" class="form-email" id="email" name="Email" placeholder="E-mail" required>
+                            <input type="email" class="form-email" id="email" name="Email" placeholder="E-mail"
+                                value="@(ViewData.ModelState["Email"]?.AttemptedValue ?? "")">
+                            <div class="invalid-feedback" id="emailError" style="display: none;">
+                                Пожалуйста, введите корректный email
+                            </div>
+                            @if (ViewData.ModelState["Email"]?.Errors.Any() == true)
+                            {
+                                <div class="invalid-feedback d-block">
+                                    @ViewData.ModelState["Email"].Errors.First().ErrorMessage
+                                </div>
+                            }
                         </div>
                         <div class="col-md-6 mb-4">
-                            <input type="text" class="form-telegram" id="telegram" name="Telegram" placeholder="Telegram">
+                            <input type="text" class="form-telegram" id="telegram" name="Telegram" placeholder="Telegram"
+                                value="@(ViewData.ModelState["Telegram"]?.AttemptedValue ?? "")">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="select mb-4">
+                    <div class="select-row row">
+                        <div class="select mb-5">
                             <div class="selectWrapper">
                                 <div class="selectCustom js-selectCustom">
-                                    <div class="selectCustom-trigger" id="selectTrigger" data-selected-value="@ViewData["SelectedServiceId"]">
-                                        @if (ViewData["SelectedServiceName"] != null)
+                                    <div class="selectCustom-trigger" id="selectTrigger">
+                                        @if (ViewData["SelectedServiceName"] != null && !string.IsNullOrEmpty(ViewData["SelectedServiceName"].ToString()))
                                         {
                                             @ViewData["SelectedServiceName"]
                                         }
@@ -69,23 +96,62 @@
                                                 </div>
                                             }
                                         }
+                                        else
+                                        {
+                                            <div class="selectCustom-option" data-value="">Нет доступных услуг</div>
+                                        }
                                     </div>
-                                    <input type="hidden" id="selectedService" class="selectedTrigger" name="NameOfTask" value="@ViewData["SelectedServiceName"]">
+                                    <input type="hidden" id="selectedService" class="selectedTrigger" name="NameOfTask" 
+                                        value="@(ViewData.ModelState["NameOfTask"]?.AttemptedValue ?? ViewData["SelectedServiceName"] ?? "")">
+                                    <div class="invalid-feedback" id="selectError" style="display: none;">
+                                        Пожалуйста, выберите спектр услуг
+                                    </div>
                                 </div>
+                                @if (ViewData.ModelState["NameOfTask"]?.Errors.Any() == true)
+                                {
+                                    <div class="invalid-feedback d-block">
+                                        @ViewData.ModelState["NameOfTask"].Errors.First().ErrorMessage
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-4">
-                            <input type="text" class="contactform-text" id="text" name="Comment" placeholder="Опишите ваш бизнес в двух словах" value="@ViewData["InitialQuestion"]" required>
+                            <input type="text" class="contactform-text" id="text" name="Comment" 
+                                placeholder="Опишите ваш бизнес в двух словах" 
+                                value="@(ViewData.ModelState["Comment"]?.AttemptedValue ?? ViewData["InitialQuestion"])">
+                            <div class="invalid-feedback" id="commentError" style="display: none;">
+                                Пожалуйста, опишите ваш бизнес
+                            </div>
+                            @if (ViewData.ModelState["Comment"]?.Errors.Any() == true)
+                            {
+                                <div class="invalid-feedback d-block">
+                                    @ViewData.ModelState["Comment"].Errors.First().ErrorMessage
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-4 checkbox-btn">
-                            <input type="checkbox" class="contactform-checkbox" id="checkbox" name="AgreeToPrivacy" required>
-                            <label class="form-checkbox-label" for="checkbox">
-                                Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
-                            </label>
+                            <div class="d-flex align-items-start flex-column">
+                                <div class="checkbox-btn-title d-flex flex-row">
+                                    <input type="checkbox" class="contactform-checkbox" id="checkbox" name="AgreeToPrivacy" value="true"
+                                        @(ViewData.ModelState["AgreeToPrivacy"]?.AttemptedValue == "true" ? "checked" : "")>
+                                    <label class="form-checkbox-label align-self-center" for="checkbox">
+                                        Согласен с условиями <a class="privacy-checkbox-link" asp-area="" asp-controller="Home" asp-action="Privacy">политики конфиденциальности</a>
+                                    </label>
+                                </div>
+                                <div class="invalid-feedback" id="checkboxError" style="display: none;">
+                                    Необходимо согласие с политикой конфиденциальности
+                                </div>
+                            </div>
+                            @if (ViewData.ModelState["AgreeToPrivacy"]?.Errors.Any() == true)
+                            {
+                                <div class="invalid-feedback d-block">
+                                    @ViewData.ModelState["AgreeToPrivacy"].Errors.First().ErrorMessage
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="row">
@@ -98,6 +164,4 @@
 </section>
 
 
-@section Scripts {
-    <script src="~/js/contactform.js"></script>
-}
+<script src="~/js/contactform.js"></script>

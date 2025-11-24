@@ -34,7 +34,9 @@ input[type="email"] {
     border: 0;
     border-radius: 7px;
     padding-left: 32px;
+    padding-right: 32px;
     color: #ffffff;
+    overflow-x: auto;
 }
 
 input::placeholder {
@@ -186,6 +188,60 @@ input::placeholder {
     color: #ffffff;
 }
 
+/* Стили для селектора */
+.selectCustom.isActive .selectCustom-options {
+    display: block;
+}
+
+.selectCustom-option.isActive {
+    background-color: #5D73FF4F;
+}
+
+.selectCustom-trigger.has-value {
+    color: #ffffff !important;
+}
+
+/* Стили для ошибок */
+.selectCustom-trigger.error {
+    border: 2px solid #dc3545 !important;
+}
+
+.invalid-feedback.d-block {
+    display: block !important;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: slideIn 0.3s ease forwards;
+}
+
+.checkbox-btn {
+    flex-direction: column;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Специальные стили для селектора */
+select + .invalid-feedback.d-block,
+.form-select + .invalid-feedback.d-block {
+    margin-bottom: 1rem; /* Больший отступ для селектора */
+}
+
+/* Чтобы гарантировать отступы для всех полей */
+.mb-3 .invalid-feedback.d-block {
+    margin-bottom: 0.5rem;
+}
+
+.select-row {
+    height: calc(120px - 20 * ((100vw - 320px) / (1920 - 320)));
+}
+
 @media (max-width: 576px) {
     .first-row {
         flex-direction: column;
@@ -214,6 +270,7 @@ input::placeholder {
         width: 100%;
         height: 50px;
         padding-left: 16px;
+        padding-right: 16px;
     }
 
     .selectCustom-trigger {

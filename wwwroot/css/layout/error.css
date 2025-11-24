@@ -44,6 +44,7 @@ body::after {
     color: #ffffff;
     margin-bottom: 0;
     line-height: 100%;
+    user-select: none;
 }
 
 .error-text {
@@ -51,6 +52,7 @@ body::after {
     font-weight: 400;
     color: #ffffff;
     margin-bottom: 60px;
+    user-select: none;
 }
 
 .return-text {
@@ -59,6 +61,7 @@ body::after {
     font-weight: 400;
     color: rgba(183, 183, 183, 1);
     transition: all 0.3s ease;
+    user-select: none;
 }
     .return-text:hover {
         color: #ffffff;

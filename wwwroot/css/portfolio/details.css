@@ -1,19 +1,19 @@
 #portfolio-content {
-    margin-top: 180px;
+    margin-top: calc(50px + 130 * ((100vw - 320px) / (1920 - 320)));
 }
 
 .portfolio-header {
-    min-height: 250px;
+    min-height: calc(150px + 100 * ((100vw - 320px) / (1920 - 320)));
     height: 100%;
-    margin-bottom: 250px;
+    margin-bottom: calc(50px + 200 * ((100vw - 320px) / (1920 - 320)));
 }
     .portfolio-header .container {
         position: relative;
-        min-height: 250px;
+        min-height: calc(150px + 100 * ((100vw - 320px) / (1920 - 320)));
     }
 
 .portfolio-name {
-    font-size: 64px;
+    font-size: calc(32px + 32 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 600;
     margin-bottom: 80px;
 }
@@ -23,7 +23,7 @@
     right: 0;
     bottom: 0;
     color: rgba(158, 158, 158, 1);
-    font-size: 24px;
+    font-size: calc(18px + 4 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
 }
 
@@ -48,12 +48,12 @@
 }
 
 .section-title {
-    font-size: 64px;
+    font-size: calc(32px + 32 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
 }
 
 .section-content {
-    font-size: 24px;
+    font-size: calc(20px + 4 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
     line-height: 120%;
     color: rgba(193, 193, 193, 1);
@@ -122,11 +122,17 @@
 
 .image-buttons .main {
     margin-right: 32px;
-    padding: 8px 50px 10px 50px;
+    padding-top: calc(4px + 4 * ((100vw - 320px) / (1920 - 320)));
+    padding-right: calc(30px + 20 * ((100vw - 320px) / (1920 - 320)));
+    padding-bottom: calc(6px + 4 * ((100vw - 320px) / (1920 - 320)));
+    padding-left: calc(30px + 20 * ((100vw - 320px) / (1920 - 320)));
 }
 
 .image-buttons .mobile {
-    padding: 8px 30px 10px 30px;
+    padding-top: calc(4px + 4 * ((100vw - 320px) / (1920 - 320)));
+    padding-right: calc(15px + 15 * ((100vw - 320px) / (1920 - 320)));
+    padding-bottom: calc(6px + 4 * ((100vw - 320px) / (1920 - 320)));
+    padding-left: calc(15px + 15 * ((100vw - 320px) / (1920 - 320)));
 }
 
 .image-button {
@@ -135,7 +141,7 @@
     border-radius: 30px;
     border: 1px solid rgba(158, 158, 158, 1);
     cursor: pointer;
-    font-size: 24px;
+    font-size: calc(20px + 4 * ((100vw - 320px) / (1920 - 320)));
     font-weight: 400;
     transition: all 0.3s ease;
 }
@@ -173,4 +179,26 @@
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@media (max-width: 567px) {
+    .trend-item {
+        display: none;
+    }
+
+    .release-date {
+        left: 1rem;
+    }
+
+    .portfolio-description .row {
+        flex-direction: column;
+    }
+        .portfolio-description .row .col-6 {
+            width: 100%;
+        }
+    
+    .image-buttons .main {
+        padding: ;
+    }
+
 }

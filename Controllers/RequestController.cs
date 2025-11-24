@@ -16,7 +16,6 @@ namespace Visitka.Controllers
             _context = context;
         }
 
-        // localhost:8218/request?serviceId=1
         [HttpGet]
         public async Task<IActionResult> Index(int? serviceId)
         {
@@ -55,43 +54,58 @@ namespace Visitka.Controllers
             return View(prices);
         }
 
-        // localhost:8218/request
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(Request request)
         {
-            // Отладочная информация
-            if (!ModelState.IsValid)
+            Console.WriteLine($"Received request: {request.ClientName}, {request.Email}, {request.PhoneNumber}");
+            Console.WriteLine($"NameOfTask: {request.NameOfTask}");
+            Console.WriteLine($"AgreeToPrivacy: {request.AgreeToPrivacy}");
+
+            // Дополнительная проверка для селекта
+            if (string.IsNullOrEmpty(request.NameOfTask) || request.NameOfTask == "Выберите спектр услуг")
             {
-                // Логируем ошибки валидации
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Validation error: {error.ErrorMessage}");
-                }
+                ModelState.AddModelError("NameOfTask", "Выберите спектр услуг");
+                Console.WriteLine("NameOfTask validation failed");
             }
 
+            // Дополнительная проверка для чекбокса
+            if (!request.AgreeToPrivacy)
+            {
+                ModelState.AddModelError("AgreeToPrivacy", "Необходимо согласие с политикой конфиденциальности");
+                Console.WriteLine("AgreeToPrivacy validation failed");
+            }
+
+            Console.WriteLine($"Starting POST processing...");
+    
             if (ModelState.IsValid)
             {
                 try
                 {
+                    Console.WriteLine("Model is valid, saving to database...");
+                    
+                    request.CreatedAt = DateTime.UtcNow;
                     _context.Requests.Add(request);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Success");
+                    
+                    Console.WriteLine("Data saved successfully, redirecting to Success...");
+                    
+                    // Проверьте, что редирект выполняется
+                    var result = RedirectToAction("Success");
+                    Console.WriteLine($"Redirect result type: {result.GetType()}");
+                    
+                    return result;
                 }
                 catch (Exception ex)
                 {
-                    // Логируем ошибку базы данных
-                    System.Diagnostics.Debug.WriteLine($"Database error: {ex.Message}");
-                    ModelState.AddModelError("", "Произошла ошибка при сохранении данных");
+                    Console.WriteLine($"Database error: {ex.Message}");
+                    ModelState.AddModelError("", "Произошла ошибка при сохранении данных.");
                 }
             }
-            // if (ModelState.IsValid)
-            // {
-            //     _context.Requests.Add(request);
-            //     await _context.SaveChangesAsync();
-            //     return RedirectToAction("Success");
-            // }
+            else
+            {
+                Console.WriteLine($"ModelState is invalid. Errors: {ModelState.ErrorCount}");
+            }
 
             // Если ошибки валидации - возвращаем обратно с данными
             var prices = await _context.Prices
@@ -106,10 +120,19 @@ namespace Visitka.Controllers
                 })
                 .ToListAsync();
 
+            // Сохраняем введенные значения для повторного отображения
+            foreach (var key in ModelState.Keys)
+            {
+                if (ModelState[key].AttemptedValue != null)
+                {
+                    ViewData[key] = ModelState[key].AttemptedValue;
+                }
+            }
+
             return View(prices);
         }
 
-        // localhost:8218/request/success
+        [HttpGet]
         [Route("Success")]
         public IActionResult Success()
         {

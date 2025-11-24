@@ -9,6 +9,7 @@ footer{
     background-color: #FF6905;
     color: #000000 !important;
     position: relative;
+    user-select: none;
 }
 
 footer .nav-link {
