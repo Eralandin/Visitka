@@ -71,7 +71,7 @@
 
 .image-container {
     position: relative;
-    max-height: 80vh;
+    max-height: 90vh;
     margin-bottom: 75px;
 }
 
@@ -88,7 +88,7 @@
     display: none;
     text-align: center;
     overflow-y: scroll;
-    max-height: 80vh;
+    max-height: 90vh;
     border-radius: 10px;
     padding-right: 10px;
 }
