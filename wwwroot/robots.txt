@@ -1,0 +1,6 @@
+﻿User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://direct-grow.ru/sitemap.xml

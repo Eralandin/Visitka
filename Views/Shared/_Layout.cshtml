@@ -4,6 +4,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DIRECT.GROW - @ViewData["Title"]</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Logo_Base_Apple_Touch.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Logo_Base32x32.png">
+    <link rel="manifest" href="~/site.webmanifest">
+    <link rel="mask-icon" href="~/safari-pinned-tab.svg" color="#5d73ff">
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    
+    <meta name="description" content="Создание эффективных сайтов для бизнеса. Профессиональный дизайн, разработка и редизайн сайтов для увеличения конверсии.">
+    <meta name="keywords" content="создание сайтов, веб-дизайн, разработка сайтов, заказать сайт, сайт для бизнеса, ui/ux дизайн, сайт визитка цена">
+    <meta name="author" content="DIRECT.GROW">
+
+    <meta property="og:site_name" content="DIRECT.GROW">
+    <meta property="og:title" content="DIRECT.GROW - Создание эффективных сайтов">
+    <meta property="og:description" content="Профессиональный дизайн, разработка и редизайн сайтов. Увеличение конверсии до 400%.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://direct-grow.ru">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://direct-grow.ru/i_feel_so.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="DIRECT.GROW - создание сайтов">
+
+    <meta property="vk:title" content="DIRECT.GROW - Создание эффективных сайтов">
+    <meta property="vk:description" content="Профессиональный дизайн, разработка и редизайн сайтов. Увеличение конверсии до 400%.">
+    <meta property="vk:image" content="https://direct-grow.ru/i_feel_so.jpg">
+    <meta property="vk:group_id" content="direct.grow">
+
+    <link rel="canonical" href="https://direct-grow.ru">
+    <link rel="alternate" hreflang="ru" href="https://direct-grow.ru">
+
+
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +47,26 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Organization",
+          "name": "DIRECT.GROW",
+          "url": "https://direct-grow.ru",
+          "logo": "https://direct-grow.ru/Logo_Base.png",
+          "description": "Создание эффективных сайтов для бизнеса",
+          "address": {
+            "@@type": "PostalAddress",
+            "addressLocality": "Новосибирск",
+            "addressCountry": "RU"
+          },
+          "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+7-995-567-65-82",
+            "contactType": "Customer Service"
+          }
+        }
+    </script>
     <header>
         <partial name="_Header" />
     </header>
